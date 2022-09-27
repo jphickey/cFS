@@ -42,3 +42,15 @@
 	path = tools/tblCRCTool
 	url = https://github.com/nasa/tblCRCTool.git
   branch = main
+[submodule "apps/bp"]
+	path = apps/bp
+	url = git@github.com:nasa/bp
+	branch = development
+[submodule "libs/bplib"]
+	path = libs/bplib
+	url = git@github.com:nasa/bplib
+	branch = development
+[submodule "apps/cf"]
+	path = apps/cf
+	url = git@github.com:nasa/cf
+	branch = main
