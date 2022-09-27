@@ -326,6 +326,13 @@
 #define CFE_MISSION_TIME_TONE_CMD_MSG 16
 #define CFE_MISSION_TIME_1HZ_CMD_MSG  17
 
+#define CFE_MISSION_BP_CMD_MSG          18
+#define CFE_MISSION_BP_SEND_HK_MSG      19
+#define CFE_MISSION_BP_WAKEUP_MSG       20
+#define CFE_MISSION_CF_CMD_MSG          21
+#define CFE_MISSION_CF_SEND_HK_MSG      22
+#define CFE_MISSION_CF_WAKE_UP_MSG      23
+
 /**
 **  \cfemissioncfg cFE Portable Message Numbers for Global Messages
 **
@@ -367,6 +374,12 @@
 #define CFE_MISSION_SB_ALLSUBS_TLM_MSG      13
 #define CFE_MISSION_SB_ONESUB_TLM_MSG       14
 #define CFE_MISSION_ES_MEMSTATS_TLM_MSG     16
+
+#define CFE_MISSION_BP_HK_TLM_MSG           17
+#define CFE_MISSION_BP_FLOW_HK_TLM_MSG      18
+#define CFE_MISSION_CF_HK_TLM_MSG           19
+#define CFE_MISSION_CF_CONFIG_TLM_MSG       20
+
 
 /**
 **  \cfeescfg Mission Max Apps in a message

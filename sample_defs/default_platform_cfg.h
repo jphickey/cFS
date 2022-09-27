@@ -31,8 +31,8 @@
  *
  */
 
-#ifndef CPU1_PLATFORM_CFG_H
-#define CPU1_PLATFORM_CFG_H
+#ifndef DEFAULT_PLATFORM_CFG_H
+#define DEFAULT_PLATFORM_CFG_H
 
 /**
 **  \cfeescfg Default virtual path for persistent storage
@@ -1730,4 +1730,4 @@
 */
 #define CFE_PLATFORM_ES_STARTUP_SCRIPT_TIMEOUT_MSEC 1000
 
-#endif /* CPU1_PLATFORM_CFG_H */
+#endif /* DEFAULT_PLATFORM_CFG_H */

@@ -86,7 +86,7 @@ SET(SPACECRAFT_ID 0x42)
 # and must be loaded explicitly via startup script or command.
 # This list is effectively appended to every TGTx_APPLIST in targets.cmake.
 # Example:
-list(APPEND MISSION_GLOBAL_APPLIST sample_app sample_lib)
+#list(APPEND MISSION_GLOBAL_APPLIST sample_app sample_lib)
 
 # The "MISSION_GLOBAL_STATIC_APPLIST" is similar to MISSION_GLOBAL_APPLIST
 # but the apps are statically linked.
@@ -99,15 +99,27 @@ list(APPEND MISSION_GLOBAL_APPLIST sample_app sample_lib)
 SET(FT_INSTALL_SUBDIR "host/functional-test")
 
 # Each target board can have its own HW arch selection and set of included apps
-SET(MISSION_CPUNAMES cpu1)
+SET(MISSION_CPUNAMES
+    cpu1
+    #cpu2
+)
 
 SET(cpu1_PROCESSORID 1)
-SET(cpu1_APPLIST ci_lab to_lab sch_lab)
+SET(cpu1_APPLIST cfe_assert)
+#SET(cpu1_APPLIST ci_lab to_lab sch_lab)
+SET(cpu1_APPLIST cfe_assert ci_lab to_lab sch_lab bp bplib cf)
+SET(cpu1_STATIC_APPLIST sample_app sample_lib)
+SET(cpu1_PSP_MODULELIST iodriver unsock_intf)
 SET(cpu1_FILELIST cfe_es_startup.scr)
+
+SET(cpu1_STATIC_SYMLIST
+    "SAMPLE_LIB_Init,SAMPLE_LIB"
+    "SAMPLE_APP_Main,SAMPLE_APP")
 
 # CPU2 example.  This is not built by default anymore but
 # serves as an example of how one would configure multiple cpus.
 SET(cpu2_PROCESSORID 2)
-SET(cpu2_APPLIST ci_lab to_lab sch_lab)
+SET(cpu2_APPLIST sample_lib sample_app ci_lab to_lab sch_lab bp bplib cf)
+SET(cpu2_PSP_MODULELIST iodriver unsock_intf)
 SET(cpu2_FILELIST cfe_es_startup.scr)
 
