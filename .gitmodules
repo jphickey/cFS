@@ -54,3 +54,7 @@
 	path = apps/cf
 	url = git@github.com:nasa/cf
 	branch = main
+[submodule "apps/sgw"]
+	path = apps/sgw
+	url = joe@phlobus.net:gitrepo/sgw
+	branch = main
