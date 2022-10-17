@@ -379,7 +379,7 @@
 #define CFE_MISSION_BP_FLOW_HK_TLM_MSG      18
 #define CFE_MISSION_CF_HK_TLM_MSG           19
 #define CFE_MISSION_CF_CONFIG_TLM_MSG       20
-
+#define CFE_MISSION_CF_EOT_TLM_MSG          21
 
 /**
 **  \cfeescfg Mission Max Apps in a message

@@ -55,7 +55,7 @@ SCH_LAB_ScheduleTable_t SCH_TBL_Structure = {.TickRate = 10,
                                                  {CFE_SB_MSGID_WRAP_VALUE(SAMPLE_APP_SEND_HK_MID), 40, 0},
                                                  {CFE_SB_MSGID_WRAP_VALUE(CF_SEND_HK_MID), 40, 0},
                                                  {CFE_SB_MSGID_WRAP_VALUE(CF_WAKE_UP_MID), 1, 0},
-                                                 {CFE_SB_MSGID_WRAP_VALUE(BP_WAKEUP_MID), 1, BP_WAKEUP_PROCESS_CC},
+                                                 //{CFE_SB_MSGID_WRAP_VALUE(BP_WAKEUP_MID), 1, BP_WAKEUP_PROCESS_CC},
                                              }};
 
 /*

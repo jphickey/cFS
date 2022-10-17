@@ -37,7 +37,7 @@ CF_ConfigTable_t CF_config_table = {
          0x091a,
          16,
          {{5, 25, CF_CFDP_CLASS_2, 23, "/cf/poll_dir", "./poll_dir", 0}, {0}, {0}, {0}, {0}},
-         "BP0_tsem",
+         "CF_tsem",
          1,
      },
      {5, /* max number of outgoing messages per wakeup */
