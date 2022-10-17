@@ -55,7 +55,7 @@
 
 # Provide default values for all important vars, which ensures they are never unset.
 # However most are overridden on a per-target basis
-O             ?= build
+O             ?= placeholder
 ARCH          ?= native
 CFG           ?= none
 INSTALLPREFIX ?= /exe
@@ -74,7 +74,8 @@ O_native ?= build-native-$(NATIVE_GCC_VER)
 O_rtems  ?= build-rtems
 O_rpi    ?= build-rpi
 O_flight ?= build-flight
-O_bplib  ?= build-bplib-standalone
+O_bplib_p  ?= build-bplib_p
+O_bplib_o  ?= build-bplib_o
 
 # The "stamp" target names are associated with a file in the build dir to indicate last run time
 # The "nostamp" target names do not have this, and are always executed
@@ -82,7 +83,7 @@ STAMPTGT_NAMES    := prep compile install test lcov detaildesign usersguide osal
 NOSTAMPTGT_NAMES  := distclean docs
 
 # The config names is a list of configurations to build
-CONFIG_NAMES      := native rtems rpi flight bplib
+CONFIG_NAMES      := native rtems rpi flight bplib_p bplib_o
 
 # The actual buildable targets are a combination of CONFIG.NAME (e.g. native.install)
 STAMP_TARGETS     := $(foreach CFG,$(CONFIG_NAMES),$(addprefix $(CFG).,$(STAMPTGT_NAMES)))
@@ -100,20 +101,22 @@ NATIVE_TARGETS    := $(addprefix native.,$(ALLTGT_NAMES))
 RTEMS_TARGETS     := $(addprefix rtems.,$(ALLTGT_NAMES))
 RPI_TARGETS       := $(addprefix rpi.,$(ALLTGT_NAMES))
 FLIGHT_TARGETS    := $(addprefix flight.,$(ALLTGT_NAMES))
-BPLIB_TARGETS     := $(addprefix bplib.,$(ALLTGT_NAMES))
+BPLIB_P_TARGETS   := $(addprefix bplib_p.,$(ALLTGT_NAMES))
+BPLIB_O_TARGETS   := $(addprefix bplib_o.,$(ALLTGT_NAMES))
 
 DISTCLEAN_TARGETS := $(addsuffix .distclean,$(CONFIG_NAMES))
 DOCS_TARGETS      := $(addsuffix .docs,$(CONFIG_NAMES))
 
 # Define the config (CFG) and build dir (O) for each target group
-$(NATIVE_TARGETS): CFG := native
-$(RTEMS_TARGETS):  CFG := rtems
-$(RPI_TARGETS):    CFG := rpi
-$(FLIGHT_TARGETS): CFG := flight
-$(BPLIB_TARGETS):  CFG := bplib
+$(NATIVE_TARGETS):   CFG := native
+$(RTEMS_TARGETS):    CFG := rtems
+$(RPI_TARGETS):      CFG := rpi
+$(FLIGHT_TARGETS):   CFG := flight
+$(BPLIB_P_TARGETS):  CFG := bplib_p
+$(BPLIB_O_TARGETS):  CFG := bplib_o
 
 # Define the ARCH used for each target group
-$(BPLIB_TARGETS) \
+$(BPLIB_P_TARGETS) $(BPLIB_O_TARGETS) \
 $(NATIVE_TARGETS): ARCH := native
 $(RTEMS_TARGETS):  ARCH := i686-rtems4.11
 $(RPI_TARGETS):    ARCH := arm-raspbian-linux
@@ -121,6 +124,11 @@ $(FLIGHT_TARGETS): ARCH := ppc7400-poky-linux
 
 # For all targets the O should be set to the per-config build dir
 $(ALL_TARGETS):    O = $(O_$(CFG))
+
+$(RTEMS_TARGETS) \
+$(RPI_TARGETS) \
+$(NATIVE_TARGETS) \
+$(FLIGHT_TARGETS): SUBTGT_PREFIX := mission-
 
 # Define extra prep options for each target group
 # Note that because prep can also be triggered indirectly, the PREP_OPTS
@@ -143,10 +151,13 @@ $(RPI_TARGETS) \
 $(NATIVE_TARGETS) \
 $(FLIGHT_TARGETS): PREP_OPTS += "$(CURDIR)/cfe"
 
-$(BPLIB_TARGETS):  PREP_OPTS += "$(CURDIR)/libs/bplib"
-$(BPLIB_TARGETS):  PREP_OPTS += -DCMAKE_BUILD_TYPE=$(BUILDTYPE)
-$(BPLIB_TARGETS):  PREP_OPTS += -DCMAKE_PREFIX_PATH=$(HOME)/code/local/lib/cmake
-$(BPLIB_TARGETS):  PREP_OPTS +=	-DCMAKE_INSTALL_PREFIX=$(HOME)/code/local
+$(BPLIB_O_TARGETS):  PREP_OPTS += -DCMAKE_PREFIX_PATH=$(HOME)/code/local/lib/cmake
+$(BPLIB_O_TARGETS):  PREP_OPTS += -DCMAKE_INSTALL_PREFIX=$(HOME)/code/local
+$(BPLIB_O_TARGETS):  PREP_OPTS += -DBPLIB_OS_LAYER=OSAL
+$(BPLIB_P_TARGETS):  ENABLE_TESTS := false
+$(BPLIB_P_TARGETS):  PREP_OPTS += -DBPLIB_OS_LAYER=POSIX
+$(BPLIB_P_TARGETS) $(BPLIB_O_TARGETS):  PREP_OPTS += -DCMAKE_BUILD_TYPE=$(BUILDTYPE)
+$(BPLIB_P_TARGETS) $(BPLIB_O_TARGETS):  PREP_OPTS += "$(CURDIR)/libs/bplib"
 
 # The following set of variables is exported to the sub-makes
 export O
@@ -168,11 +179,20 @@ GET_STAMP_TARGET = $(O_$(basename $(1)))/stamp$(suffix $(1))
 COMMANDLINE_STAMPTGTS  := $(filter $(addprefix %.,$(STAMPTGT_NAMES)),$(MAKECMDGOALS))
 COMMANDLINE_STAMPFILES := $(foreach GOAL,$(COMMANDLINE_STAMPTGTS),$(call GET_STAMP_TARGET,$(GOAL)))
 
-.PHONY: $(ALLTGT_NAMES) $(ALL_TARGETS) .force
+.PHONY: $(ALLTGT_NAMES) $(ALL_TARGETS) make-buildlink rm-buildlink .force
 
 # The "world" target is a shorthand to build and tests all items possible
-world: native.lcov native.docs flight.install rpi.install rtems.test
+world: native.lcov native.docs flight.install rpi.install rtems.test bplib.lcov
 	@echo "WORLD BUILD COMPLETED"
+
+$(addprefix bplib.,prep compile install test lcov clean):
+	$(MAKE) $(addsuffix $(suffix $(@)),bplib_o bplib_p)
+	@echo "$(@) COMPLETED"
+
+# The "bplib" install targets are currently no-ops (always success)
+$(O_bplib_o)/stamp.install $(O_bplib_p)/stamp.install: %/stamp.install: %/stamp.compile
+	@echo "No install for standalone bplib"
+	touch "$(@)"
 
 # The "distclean" goal removes the entire build dir, including generated makefiles
 $(DISTCLEAN_TARGETS):
@@ -183,11 +203,14 @@ $(DOCS_TARGETS):  %.docs: %.detaildesign
 $(DOCS_TARGETS):  %.docs: %.usersguide
 $(DOCS_TARGETS):  %.docs: %.osalguide
 
-build: .force
-	rm -f build
-	ln -s $(O_native) build
+make-buildlink: rm-buildlink .force
+	ln -s $(O) build
 
-native.install: | build
+rm-buildlink: .force
+	rm -f build
+
+native.install: | make-buildlink
+native.distclean: | rm-buildlink
 
 # A generic pattern rule to remove a stamp file, ensuring target gets rebuilt
 %.rm-stamp:
@@ -197,21 +220,21 @@ native.install: | build
 %/stamp.prep:
 	mkdir -p "$(O)"
 	(cd "$(O)" && env $(ENV_OPTS) cmake $(PREP_OPTS) )
-	echo "$(PREP_OPTS)" > "$(@)"
+	echo '$(PREP_OPTS)' > "$(@)"
 
 # A generic pattern rule to invoke a sub-make for the appliction compile only
-%/stamp.compile: %/stamp.prep .force
-	$(MAKE) --no-print-directory -C "$(O)" all
+%/stamp.compile: %/stamp.prep
+	$(MAKE) --no-print-directory -C "$(O)" $(SUBTGT_PREFIX)all
 	touch "$(@)"
 
 # A generic pattern rule to invoke a sub-make for the appliction build/install to staging area
-%/stamp.install: %/stamp.prep .force
-	$(MAKE) --no-print-directory -C "$(O)" mission-install
+%/stamp.install: %/stamp.prep
+	$(MAKE) --no-print-directory -C "$(O)" $(SUBTGT_PREFIX)install
 	touch "$(@)"
 
 # A generic pattern rule to clean a build area
-%/stamp.clean: %/stamp.prep
-	$(MAKE) --no-print-directory -C "$(O)" mission-clean
+%/stamp.clean: %/stamp.prep %/stamp.compile.rm-stamp %/stamp.install.rm-stamp %/stamp.test.rm-stamp %/stamp.lcov.rm-stamp
+	$(MAKE) --no-print-directory -C "$(O)" $(SUBTGT_PREFIX)clean
 	touch "$(@)"
 
 # A generic pattern rule to invoke a sub-make for running tests
@@ -225,17 +248,17 @@ native.install: | build
 	touch "$(@)"
 
 # A generic pattern rule to invoke a sub-make for building detail design doc
-%/stamp.detaildesign: %/stamp.prep .force
+%/stamp.detaildesign: %/stamp.prep
 	$(MAKE) --no-print-directory -C "$(O)" mission-doc
 	touch "$(@)"
 
 # A generic pattern rule to invoke a sub-make for building user guide doc
-%/stamp.usersguide: %/stamp.prep .force
+%/stamp.usersguide: %/stamp.prep
 	$(MAKE) --no-print-directory -C "$(O)" cfe-usersguide
 	touch "$(@)"
 
 # A generic pattern rule to invoke a sub-make for building osal guide doc
-%/stamp.osalguide: %/stamp.prep .force
+%/stamp.osalguide: %/stamp.prep
 	$(MAKE) --no-print-directory -C "$(O)" osal-apiguide
 	touch "$(@)"
 
