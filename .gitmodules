@@ -58,3 +58,7 @@
 	path = apps/sgw
 	url = joe@phlobus.net:gitrepo/sgw
 	branch = main
+[submodule "eds"]
+	path = tools/eds
+	url = git@github.com:nasa/EdsLib.git
+	branch = main
