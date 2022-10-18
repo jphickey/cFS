@@ -185,7 +185,7 @@ COMMANDLINE_STAMPFILES := $(foreach GOAL,$(COMMANDLINE_STAMPTGTS),$(call GET_STA
 world: native.lcov native.docs flight.install rpi.install rtems.test bplib.lcov
 	@echo "WORLD BUILD COMPLETED"
 
-$(addprefix bplib.,prep compile install test lcov clean):
+$(addprefix bplib.,prep compile install test lcov clean distclean):
 	$(MAKE) $(addsuffix $(suffix $(@)),bplib_o bplib_p)
 	@echo "$(@) COMPLETED"
 

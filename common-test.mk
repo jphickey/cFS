@@ -59,7 +59,6 @@ ALL_CF_COVERAGE_TESTS += coverage-cf-cf_codec-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_crc-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_timer-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_utils-testrunner
-
 ALL_CFE_COVERAGE_TESTS += $(ALL_CF_COVERAGE_TESTS)
 
 ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_common-testrunner
@@ -69,6 +68,9 @@ ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_base-testrunner
 ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_v7-testrunner
 ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_cache-testrunner
 ALL_CFE_COVERAGE_TESTS += $(ALL_BPLIB_COVERAGE_TESTS)
+
+ALL_BP_COVERAGE_TESTS += coverage-bp-ALL-testrunner
+ALL_CFE_COVERAGE_TESTS += $(ALL_BP_COVERAGE_TESTS)
 
 
 ALL_OSAL_COVERAGE_TESTS :=                      \
