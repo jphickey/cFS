@@ -62,3 +62,7 @@
 	path = tools/eds
 	url = git@github.com:nasa/EdsLib.git
 	branch = main
+[submodule "fm"]
+	path = apps/fm
+	url = git@github.com:nasa/fm
+	branch = main
