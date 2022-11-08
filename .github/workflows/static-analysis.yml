@@ -33,7 +33,7 @@ jobs:
     needs: check-for-duplicates
     if: ${{ needs.check-for-duplicates.outputs.should_skip != 'true' }}
     name: Run cppcheck
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     strategy:
       fail-fast: false
@@ -48,9 +48,58 @@ jobs:
         with:
           submodules: true
 
-      - name: Run general cppcheck
-        run: cppcheck --force --inline-suppr . 2> general_cppcheck_err.txt
+      - name: Run general cppcheck 
+        run: |
+          cppcheck --force --inline-suppr . --xml 2> general_cppcheck_err.xml  
+          cppcheck --force --inline-suppr . 2> general_cppcheck_err.txt
           
+      - name: Convert general cppcheck
+        uses: airtower-luna/convert-to-sarif@v0.2.0
+        with:
+          tool: 'CppCheck'
+          input_file: 'general_cppcheck_err.xml'
+          sarif_file: 'general_cppcheck_err.sarif'
+          
+      - name: Define workspace
+        run: |
+          echo "CONTAINER_WORKSPACE=${PWD}" >> ${GITHUB_ENV}
+          
+      - name: Upload general SARIF results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'general_cppcheck_err.sarif'
+          checkout_path: ${{ env.CONTAINER_WORKSPACE }}
+          category: 'General-cppcheck'
+          
+        # Run strict static analysis for embedded portions of cfe, osal, and psp
+      - name: Strict cppcheck
+        if: ${{ inputs.strict-dir-list !='' }}
+        run: |
+          cppcheck --force --inline-suppr --std=c99 --language=c --enable=warning,performance,portability,style --suppress=variableScope --inconclusive ${{ inputs.strict-dir-list }} --xml 2> strict_cppcheck_err.xml 
+          cppcheck --force --inline-suppr --std=c99 --language=c --enable=warning,performance,portability,style --suppress=variableScope --inconclusive ${{ inputs.strict-dir-list }} 2> strict_cppcheck_err.txt
+ 
+      - name: Convert strict cppcheck
+        uses: airtower-luna/convert-to-sarif@v0.2.0
+        if: ${{ inputs.strict-dir-list !='' }}
+        with:
+          tool: 'CppCheck'
+          input_file: 'strict_cppcheck_err.xml'
+          sarif_file: 'strict_cppcheck_err.sarif'
+
+      - name: Archive static analysis artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: cppcheck-errors
+          path: ./*cppcheck_err.*
+
+      - name: Upload strict SARIF results
+        uses: github/codeql-action/upload-sarif@v2
+        if: ${{ inputs.strict-dir-list !='' }}
+        with:
+          sarif_file: 'strict_cppcheck_err.sarif'
+          checkout_path: ${{ env.CONTAINER_WORKSPACE }}
+          category: 'Strict-cppcheck'
+  
       - name: Check for general errors
         run: |
           if [[ -s general_cppcheck_err.txt ]];
@@ -58,12 +107,6 @@ jobs:
             cat general_cppcheck_err.txt
             exit -1
           fi
-
-        # Run strict static analysis for embedded portions of cfe, osal, and psp
-      - name: Strict cppcheck
-        if: ${{ inputs.strict-dir-list !='' }}
-        run: cppcheck --force --inline-suppr --std=c99 --language=c --enable=warning,performance,portability,style --suppress=variableScope --inconclusive ${{ inputs.strict-dir-list }} 2> strict_cppcheck_err.txt
-
       - name: Check for strict errors
         if: ${{ inputs.strict-dir-list !='' }}
         run: |
@@ -72,9 +115,3 @@ jobs:
             cat strict_cppcheck_err.txt
             exit -1
           fi
-
-      - name: Archive Static Analysis Artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: cppcheck-errors
-          path: ./*cppcheck_err.txt
