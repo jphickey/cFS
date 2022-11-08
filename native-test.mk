@@ -18,7 +18,7 @@ TEST_TARGETS := $(addsuffix ctest.log,$(dir $(wildcard $(OBJDIR)/*/CTestTestfile
 all_logs: | clean_lcov
 
 $(OBJDIR)/coverage_test.info: force
-	lcov --capture --rc lcov_branch_coverage=1 --directory "$(OBJDIR)" --output-file "$(OBJDIR)/coverage_test.info"
+	lcov --capture --rc lcov_branch_coverage=1 --exclude '/usr/*' --directory "$(OBJDIR)" --output-file "$(OBJDIR)/coverage_test.info"
 
 clean_lcov:
 	find "$(OBJDIR)" -type f -name '*.gcno' -o -name '*.gcda' -print0 | xargs -0 rm -f
