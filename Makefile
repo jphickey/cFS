@@ -130,6 +130,8 @@ $(RPI_TARGETS) \
 $(NATIVE_TARGETS) \
 $(FLIGHT_TARGETS): SUBTGT_PREFIX := mission-
 
+$(ALL_TARGETS): ENV_OPTS += PKG_CONFIG_PATH=$(HOME)/code/local/lib/pkgconfig
+
 # Define extra prep options for each target group
 # Note that because prep can also be triggered indirectly, the PREP_OPTS
 # is set for all targets, not just the prep target itself
@@ -229,42 +231,42 @@ native.distclean: | rm-buildlink
 
 # A generic pattern rule to invoke a sub-make for the appliction compile only
 %/stamp.compile: %/stamp.prep
-	$(MAKE) --no-print-directory -C "$(O)" $(SUBTGT_PREFIX)all
+	env $(ENV_OPTS) $(MAKE) --no-print-directory -C "$(O)" $(SUBTGT_PREFIX)all
 	touch "$(@)"
 
 # A generic pattern rule to invoke a sub-make for the appliction build/install to staging area
 %/stamp.install: %/stamp.prep
-	$(MAKE) --no-print-directory -C "$(O)" $(SUBTGT_PREFIX)install
+	env $(ENV_OPTS) $(MAKE) --no-print-directory -C "$(O)" $(SUBTGT_PREFIX)install
 	touch "$(@)"
 
 # A generic pattern rule to clean a build area
 %/stamp.clean: %/stamp.prep %/stamp.compile.rm-stamp %/stamp.install.rm-stamp %/stamp.test.rm-stamp %/stamp.lcov.rm-stamp
-	$(MAKE) --no-print-directory -C "$(O)" $(SUBTGT_PREFIX)clean
+	env $(ENV_OPTS) $(MAKE) --no-print-directory -C "$(O)" $(SUBTGT_PREFIX)clean
 	touch "$(@)"
 
 # A generic pattern rule to invoke a sub-make for running tests
 %/stamp.test: %/stamp.install
-	$(MAKE) --no-print-directory -f $(CFG)-test.mk all_tests
+	env $(ENV_OPTS) $(MAKE) --no-print-directory -f $(CFG)-test.mk all_tests
 	touch "$(@)"
 
 # A generic pattern rule to invoke a sub-make for running coverage analysis
 %/stamp.lcov: %/stamp.test
-	$(MAKE) --no-print-directory -f $(CFG)-test.mk all_lcov
+	env $(ENV_OPTS) $(MAKE) --no-print-directory -f $(CFG)-test.mk all_lcov
 	touch "$(@)"
 
 # A generic pattern rule to invoke a sub-make for building detail design doc
 %/stamp.detaildesign: %/stamp.prep
-	$(MAKE) --no-print-directory -C "$(O)" mission-doc
+	env $(ENV_OPTS) $(MAKE) --no-print-directory -C "$(O)" mission-doc
 	touch "$(@)"
 
 # A generic pattern rule to invoke a sub-make for building user guide doc
 %/stamp.usersguide: %/stamp.prep
-	$(MAKE) --no-print-directory -C "$(O)" cfe-usersguide
+	env $(ENV_OPTS) $(MAKE) --no-print-directory -C "$(O)" cfe-usersguide
 	touch "$(@)"
 
 # A generic pattern rule to invoke a sub-make for building osal guide doc
 %/stamp.osalguide: %/stamp.prep
-	$(MAKE) --no-print-directory -C "$(O)" osal-apiguide
+	env $(ENV_OPTS) $(MAKE) --no-print-directory -C "$(O)" osal-apiguide
 	touch "$(@)"
 
 # also define targets which builds all configs (except world, which has custom rule above)

@@ -58,3 +58,7 @@
 	path = tools/eds
 	url = https://github.com/nasa/EdsLib.git
 	branch = main
+[submodule "libs/scriptengine"]
+	path = libs/scriptengine
+	url = https://github.com/jphickey/scriptengine.git
+	branch = main
