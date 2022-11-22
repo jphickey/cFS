@@ -86,6 +86,9 @@
     <Define name="SB_SUB_RPT_CTRL_TOPICID"      value="${CFE_MISSION/TELECOMMAND_BASE_TOPICID} + 21"    />
     <Define name="TEST_CMD_TOPICID"             value="${CFE_MISSION/TELECOMMAND_BASE_TOPICID} + 22"    />
 
+    <Define name="FM_CMD_TOPICID" value="${CFE_MISSION/TELECOMMAND_BASE_TOPICID} + 23" />
+    <Define name="FM_SEND_HK_TOPICID" value="${CFE_MISSION/TELECOMMAND_BASE_TOPICID} + 24" />
+
     <!-- Executive Services (ES) Telemetry Topics -->
     <Define name="ES_HK_TLM_TOPICID"        value="${CFE_MISSION/TELEMETRY_BASE_TOPICID} + 0"   />
     <Define name="ES_APP_TLM_TOPICID"       value="${CFE_MISSION/TELEMETRY_BASE_TOPICID} + 1"  />
@@ -112,6 +115,12 @@
     <Define name="TO_LAB_DATA_TYPES_TOPICID"    value="${CFE_MISSION/TELEMETRY_BASE_TOPICID} + 17"  />
     <Define name="SAMPLE_APP_HK_TLM_TOPICID"    value="${CFE_MISSION/TELEMETRY_BASE_TOPICID} + 18"  />
     <Define name="TEST_HK_TLM_TOPICID"          value="${CFE_MISSION/TELEMETRY_BASE_TOPICID} + 19"    />
+
+    <Define name="FM_HK_TLM_TOPICID" value="${CFE_MISSION/TELEMETRY_BASE_TOPICID} + 20" />
+    <Define name="FM_FILE_INFO_TLM_TOPICID" value="${CFE_MISSION/TELEMETRY_BASE_TOPICID} + 21" />
+    <Define name="FM_DIR_LIST_TLM_TOPICID" value="${CFE_MISSION/TELEMETRY_BASE_TOPICID} + 22" />
+    <Define name="FM_OPEN_FILES_TLM_TOPICID" value="${CFE_MISSION/TELEMETRY_BASE_TOPICID} + 23" />
+    <Define name="FM_FREE_SPACE_TLM_TOPICID" value="${CFE_MISSION/TELEMETRY_BASE_TOPICID} + 24" />
 
 </Package>
 </DesignParameters>

@@ -64,6 +64,11 @@
     <Define name="MEM_OFFSET_SIZE_BITS" value="32" />
   </Package>
 
+  <Package name="FM" shortDescription="FM configurable items">
+    <Define name="TABLE_ENTRY_COUNT" value="10" />
+    <Define name="DIR_LIST_PKT_ENTRIES" value="24" />
+  </Package>
+
 
   <Package name="CFE_MISSION" shortDescription="cFE mission configuration">
       <!--
@@ -557,6 +562,8 @@
             any possible neighboring fields without implicit padding.
       </LongDescription>
     </Define>
+
+    <Define name="OS_MAX_NUM_OPEN_FILES" value="50" />
 
   </Package>
 
