@@ -43,7 +43,7 @@ ALL_CFE_COVERAGE_TESTS := 			\
     coverage-sb-ALL-testrunner      \
     coverage-tbl-ALL-testrunner     \
     coverage-time-ALL-testrunner    \
-	msg_UT resourceid_UT \
+	resourceid_UT \
     sbr_map_direct_UT sbr_map_hash_UT
 
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_app-testrunner
@@ -59,7 +59,7 @@ ALL_CF_COVERAGE_TESTS += coverage-cf-cf_codec-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_crc-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_timer-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_utils-testrunner
-ALL_CFE_COVERAGE_TESTS += $(ALL_CF_COVERAGE_TESTS)
+#ALL_CFE_COVERAGE_TESTS += $(ALL_CF_COVERAGE_TESTS)
 
 ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_common-testrunner
 ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_mpool-testrunner
@@ -70,7 +70,7 @@ ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_cache-testrunner
 ALL_CFE_COVERAGE_TESTS += $(ALL_BPLIB_COVERAGE_TESTS)
 
 ALL_BP_COVERAGE_TESTS += coverage-bp-ALL-testrunner
-ALL_CFE_COVERAGE_TESTS += $(ALL_BP_COVERAGE_TESTS)
+#ALL_CFE_COVERAGE_TESTS += $(ALL_BP_COVERAGE_TESTS)
 
 
 ALL_OSAL_COVERAGE_TESTS :=                      \
