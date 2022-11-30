@@ -107,7 +107,7 @@ SET(MISSION_CPUNAMES
 SET(cpu1_PROCESSORID 1)
 SET(cpu1_APPLIST cfe_assert)
 #SET(cpu1_APPLIST ci_lab to_lab sch_lab)
-SET(cpu1_APPLIST cfe_assert ci_lab to_lab sch_lab cf sgw)
+SET(cpu1_APPLIST cfe_assert ci_lab to_lab sch_lab cf fm sgw)
 SET(cpu1_STATIC_APPLIST sample_app sample_lib)
 LIST(APPEND cpu1_STATIC_APPLIST bp bplib)
 SET(cpu1_PSP_MODULELIST iodriver unsock_intf)
