@@ -66,3 +66,7 @@
 	path = apps/fm
 	url = git@github.com:nasa/fm
 	branch = main
+[submodule "LC"]
+	path = apps/lc
+	url = git@github.com:nasa/LC.git
+	branch = main
