@@ -69,6 +69,11 @@
     <Define name="DIR_LIST_PKT_ENTRIES" value="24" />
   </Package>
 
+  <Package name="LC" shortDescription="LC configurable items">
+    <Define name="MAX_ACTIONPOINTS" value="176" />
+    <Define name="MAX_WATCHPOINTS" value="176" />
+    <Define name="MAX_RPN_EQU_SIZE" value="20" />
+  </Package>
 
   <Package name="CFE_MISSION" shortDescription="cFE mission configuration">
       <!--

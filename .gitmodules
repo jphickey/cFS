@@ -58,3 +58,6 @@
 	path = tools/eds
 	url = https://github.com/nasa/EdsLib.git
 	branch = main
+[submodule "lc"]
+	path = apps/lc
+	url = git@github.com:nasa/lc
