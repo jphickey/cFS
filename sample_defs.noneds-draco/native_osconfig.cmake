@@ -70,5 +70,3 @@ set(OSAL_CONFIG_INCLUDE_SHELL TRUE)
 #
 # Increase the OS_printf buffer size
 set(OSAL_CONFIG_PRINTF_BUFFER_SIZE 300)
-
-

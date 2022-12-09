@@ -36,15 +36,21 @@ ALL_OSAL_PARAM_TESTS :=          	\
     osal_network_UT        \
     osal_timer_UT          \
 
-ALL_CFE_COVERAGE_TESTS := 			\
+
+ALL_CFE_CORE_COVERAGE_TESTS :=      \
 	coverage-es-ALL-testrunner      \
     coverage-evs-ALL-testrunner     \
     coverage-fs-ALL-testrunner      \
     coverage-sb-ALL-testrunner      \
     coverage-tbl-ALL-testrunner     \
-    coverage-time-ALL-testrunner    \
-	resourceid_UT \
-    sbr_map_direct_UT sbr_map_hash_UT
+    coverage-time-ALL-testrunner
+
+#ALL_CFE_CORE_COVERAGE_TESTS += msg_UT
+ALL_CFE_CORE_COVERAGE_TESTS += resourceid_UT
+ALL_CFE_CORE_COVERAGE_TESTS += sbr_map_direct_UT
+ALL_CFE_CORE_COVERAGE_TESTS += sbr_map_hash_UT
+
+ALL_CFE_COVERAGE_TESTS += $(ALL_CFE_CORE_COVERAGE_TESTS)
 
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_app-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_cfdp-testrunner
@@ -71,6 +77,13 @@ ALL_CFE_COVERAGE_TESTS += $(ALL_BPLIB_COVERAGE_TESTS)
 
 ALL_BP_COVERAGE_TESTS += coverage-bp-ALL-testrunner
 #ALL_CFE_COVERAGE_TESTS += $(ALL_BP_COVERAGE_TESTS)
+
+ALL_FM_COVERAGE_TESTS += coverage-fm-fm_app-testrunner
+ALL_FM_COVERAGE_TESTS += coverage-fm-fm_child-testrunner
+ALL_FM_COVERAGE_TESTS += coverage-fm-fm_cmds-testrunner
+ALL_FM_COVERAGE_TESTS += coverage-fm-fm_cmd_utils-testrunner
+ALL_FM_COVERAGE_TESTS += coverage-fm-fm_tbl-testrunner
+#ALL_CFE_COVERAGE_TESTS += $(ALL_FM_COVERAGE_TESTS)
 
 
 ALL_OSAL_COVERAGE_TESTS :=                      \

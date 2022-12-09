@@ -106,7 +106,7 @@ SET(MISSION_CPUNAMES
 
 SET(cpu1_PROCESSORID 1)
 SET(cpu1_APPLIST cfe_assert)
-SET(cpu1_APPLIST cfe_assert ci_lab to_lab sch_lab lc fm bplib)
+SET(cpu1_APPLIST cfe_assert ci_lab to_lab sch_lab fm bplib)
 SET(cpu1_STATIC_APPLIST sample_app sample_lib)
 #SET(cpu1_PSP_MODULELIST eeprom_stub)
 SET(cpu1_FILELIST cfe_es_startup.scr)

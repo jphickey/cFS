@@ -74,6 +74,7 @@ O_native ?= build-native-$(NATIVE_GCC_VER)
 O_rtems  ?= build-rtems
 O_rpi    ?= build-rpi
 O_flight ?= build-flight
+O_osal   ?= build-osal
 O_bplib_p  ?= build-bplib_p
 O_bplib_o  ?= build-bplib_o
 
@@ -83,7 +84,7 @@ STAMPTGT_NAMES    := prep compile install test lcov detaildesign usersguide osal
 NOSTAMPTGT_NAMES  := distclean docs
 
 # The config names is a list of configurations to build
-CONFIG_NAMES      := native rtems rpi flight bplib_p bplib_o
+CONFIG_NAMES      := native rtems rpi flight osal bplib_p bplib_o
 
 # The actual buildable targets are a combination of CONFIG.NAME (e.g. native.install)
 STAMP_TARGETS     := $(foreach CFG,$(CONFIG_NAMES),$(addprefix $(CFG).,$(STAMPTGT_NAMES)))
@@ -101,6 +102,7 @@ NATIVE_TARGETS    := $(addprefix native.,$(ALLTGT_NAMES))
 RTEMS_TARGETS     := $(addprefix rtems.,$(ALLTGT_NAMES))
 RPI_TARGETS       := $(addprefix rpi.,$(ALLTGT_NAMES))
 FLIGHT_TARGETS    := $(addprefix flight.,$(ALLTGT_NAMES))
+OSAL_TARGETS      := $(addprefix osal.,$(ALLTGT_NAMES))
 BPLIB_P_TARGETS   := $(addprefix bplib_p.,$(ALLTGT_NAMES))
 BPLIB_O_TARGETS   := $(addprefix bplib_o.,$(ALLTGT_NAMES))
 
@@ -112,11 +114,14 @@ $(NATIVE_TARGETS):   CFG := native
 $(RTEMS_TARGETS):    CFG := rtems
 $(RPI_TARGETS):      CFG := rpi
 $(FLIGHT_TARGETS):   CFG := flight
+$(OSAL_TARGETS):     CFG := osal
 $(BPLIB_P_TARGETS):  CFG := bplib_p
 $(BPLIB_O_TARGETS):  CFG := bplib_o
 
 # Define the ARCH used for each target group
-$(BPLIB_P_TARGETS) $(BPLIB_O_TARGETS) \
+$(BPLIB_P_TARGETS) \
+$(BPLIB_O_TARGETS) \
+$(OSAL_TARGETS) \
 $(NATIVE_TARGETS): ARCH := native
 $(RTEMS_TARGETS):  ARCH := i686-rtems4.11
 $(RPI_TARGETS):    ARCH := arm-raspbian-linux
@@ -157,6 +162,13 @@ $(RTEMS_TARGETS) \
 $(RPI_TARGETS) \
 $(NATIVE_TARGETS) \
 $(FLIGHT_TARGETS): PREP_OPTS += "$(CURDIR)/cfe"
+
+$(OSAL_TARGETS): PREP_OPTS += -DCMAKE_INSTALL_PREFIX=$(HOME)/code/local
+$(OSAL_TARGETS): PREP_OPTS += -DOSAL_OMIT_DEPRECATED=TRUE
+$(OSAL_TARGETS): PREP_OPTS += -DOSAL_SYSTEM_BSPTYPE=generic-linux
+$(OSAL_TARGETS): PREP_OPTS += -DOSAL_CONFIG_DEBUG_PERMISSIVE_MODE=on
+$(OSAL_TARGETS): PREP_OPTS += -DOSAL_USER_C_FLAGS='-Wall -Werror'
+$(OSAL_TARGETS): PREP_OPTS += "$(CURDIR)/osal"
 
 $(BPLIB_O_TARGETS):  PREP_OPTS += -DCMAKE_PREFIX_PATH=$(HOME)/code/local/lib/cmake
 $(BPLIB_O_TARGETS):  PREP_OPTS += -DCMAKE_INSTALL_PREFIX=$(HOME)/code/local

@@ -60,4 +60,9 @@
 	branch = main
 [submodule "lc"]
 	path = apps/lc
-	url = git@github.com:nasa/lc
+	url = git@github.com:nasa/LC.git
+	branch = main
+[submodule "apps/sc"]
+	path = apps/sc
+	url = git@github.com:nasa/sc
+	branch = main
