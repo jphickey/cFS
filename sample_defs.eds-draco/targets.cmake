@@ -86,7 +86,7 @@ SET(SPACECRAFT_ID 0x42)
 # and must be loaded explicitly via startup script or command.
 # This list is effectively appended to every TGTx_APPLIST in targets.cmake.
 # Example:
-#list(APPEND MISSION_GLOBAL_APPLIST sample_app sample_lib)
+list(APPEND MISSION_GLOBAL_APPLIST sample_app sample_lib)
 
 # The "MISSION_GLOBAL_STATIC_APPLIST" is similar to MISSION_GLOBAL_APPLIST
 # but the apps are statically linked.
@@ -105,20 +105,26 @@ SET(MISSION_CPUNAMES
 )
 
 SET(cpu1_PROCESSORID 1)
-SET(cpu1_APPLIST cfe_assert)
-SET(cpu1_APPLIST cfe_assert ci_lab to_lab sch_lab fm bplib)
-SET(cpu1_STATIC_APPLIST sample_app sample_lib)
+SET(cpu1_APPLIST ci_lab to_lab sch_lab bplib)
+LIST(APPEND cpu1_APPLIST scriptengine)
+LIST(APPEND cpu1_APPLIST fm)
+LIST(APPEND cpu1_APPLIST lc)
+#LIST(APPEND cpu1_APPLIST cfe_assert)
 #SET(cpu1_PSP_MODULELIST eeprom_stub)
 SET(cpu1_FILELIST cfe_es_startup.scr)
 
-SET(cpu1_STATIC_SYMLIST
-    "SAMPLE_LIB_Init,SAMPLE_LIB"
-    "SAMPLE_APP_Main,SAMPLE_APP")
+#SET(cpu1_STATIC_SYMLIST
+#    "SAMPLE_LIB_Init,SAMPLE_LIB"
+#    "SAMPLE_APP_Main,SAMPLE_APP")
 
 # CPU2 example.  This is not built by default anymore but
 # serves as an example of how one would configure multiple cpus.
 SET(cpu2_PROCESSORID 2)
-SET(cpu2_APPLIST sample_lib sample_app)
 SET(cpu2_FILELIST cfe_es_startup.scr)
 
 #list(REMOVE_ITEM MISSION_GLOBAL_APPLIST cfe_testcase)
+
+# Set these to enable Lua and Python bindings in FSW
+set(EDSLIB_PYTHON_SEARCH_VERSION python3>=3.6)
+set(EDSLIB_LUA_SEARCH_VERSION    lua-5.3 lua)
+set(EDSLIB_JSON_C_SEARCH_VERSION json-c)

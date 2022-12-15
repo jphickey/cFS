@@ -1,3 +1,4 @@
-
-message("inside install_custom1")
-#add_cfe_tables(sample_app alt_sample_tbl.c alt2_sample_tbl.c)
+install(FILES /usr/lib/x86_64-linux-gnu/liblua5.3.so.0.0.0 
+	DESTINATION ${TGTNAME}/${INSTALL_SUBDIR} 
+	RENAME liblua.so
+)
