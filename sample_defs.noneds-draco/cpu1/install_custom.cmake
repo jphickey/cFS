@@ -2,6 +2,7 @@
 message("inside install_custom cpu1")
 target_include_directories(cpu1_sch_lab_table_sch_lab_table PRIVATE
     $<TARGET_PROPERTY:cf,INCLUDE_DIRECTORIES>
+    $<TARGET_PROPERTY:sc,INCLUDE_DIRECTORIES>
 )
 
 if (TARGET cpu1_bp_bp_flowtable)

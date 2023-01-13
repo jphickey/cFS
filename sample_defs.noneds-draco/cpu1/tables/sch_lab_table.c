@@ -31,6 +31,7 @@
 #include "to_lab_msgids.h"
 #include "sample_app_msgids.h"
 #include "cf_msgids.h"
+#include "sc_msgids.h"
 //#include "bp_msgids.h"
 //#include "bp_msgdefs.h"
 
@@ -55,6 +56,7 @@ SCH_LAB_ScheduleTable_t SCH_TBL_Structure = {.TickRate = 10,
                                                  {CFE_SB_MSGID_WRAP_VALUE(SAMPLE_APP_SEND_HK_MID), 40, 0},
                                                  {CFE_SB_MSGID_WRAP_VALUE(CF_SEND_HK_MID), 40, 0},
                                                  {CFE_SB_MSGID_WRAP_VALUE(CF_WAKE_UP_MID), 1, 0},
+                                                 {CFE_SB_MSGID_WRAP_VALUE(SC_1HZ_WAKEUP_MID), 10, 0},
                                                  //{CFE_SB_MSGID_WRAP_VALUE(BP_WAKEUP_MID), 1, BP_WAKEUP_PROCESS_CC},
                                              }};
 
