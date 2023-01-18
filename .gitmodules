@@ -78,3 +78,8 @@
 	path = apps/hk
 	url = git@github.com:nasa/hk
 	branch = main
+[submodule "apps/hs"]
+	path = apps/hs
+	url = git@github.com:nasa/HS
+	branch = main
+
