@@ -71,6 +71,7 @@ PointerAlignment: Right
 ReflowComments:  true
 SortIncludes:    false
 SpaceAfterCStyleCast: false
+SpaceAroundPointerQualifiers: Before
 SpaceBeforeAssignmentOperators: true
 SpaceBeforeParens: ControlStatements
 SpaceInEmptyParentheses: false
@@ -80,7 +81,6 @@ SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
 Standard:        c++11
-TabWidth:        8
+TabWidth:        4
 UseTab:          Never
 ...
-
