@@ -7,7 +7,7 @@
 # Definitions and options specified here will be used when cross-compiling
 # _all_ FSW code for _all_ targets defined in targets.cmake.
 #
-# Avoid machine-specific code generation options in this file (e.g. -f,-m options); such 
+# Avoid machine-specific code generation options in this file (e.g. -f,-m options); such
 # options should be localized to the toolchain file such that they will only be
 # included on the machines where they apply.
 #
@@ -39,8 +39,6 @@ add_compile_options(
     -Wno-conversion            # Lots of false positives
     -Wno-stringop-truncation   # Lots of false positives
     -Wno-format-truncation     # Lots of false positives
-    -Wno-restrict              # False positives, possible compiler bug?
 )
 
 add_definitions(-D_LARGEFILE_SOURCE)
-
