@@ -12,5 +12,4 @@ add_compile_options(
     -Wno-conversion            # Lots of false positives
     -Wno-stringop-truncation   # Lots of false positives
     -Wno-format-truncation     # Lots of false positives
-    -Wno-restrict              # Mysterious error in OSAL
 )
