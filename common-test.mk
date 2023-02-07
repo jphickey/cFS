@@ -83,7 +83,7 @@ ALL_FM_COVERAGE_TESTS += coverage-fm-fm_child-testrunner
 ALL_FM_COVERAGE_TESTS += coverage-fm-fm_cmds-testrunner
 ALL_FM_COVERAGE_TESTS += coverage-fm-fm_cmd_utils-testrunner
 ALL_FM_COVERAGE_TESTS += coverage-fm-fm_tbl-testrunner
-#ALL_CFE_COVERAGE_TESTS += $(ALL_FM_COVERAGE_TESTS)
+ALL_CFE_COVERAGE_TESTS += $(ALL_FM_COVERAGE_TESTS)
 
 
 ALL_OSAL_COVERAGE_TESTS :=                      \
