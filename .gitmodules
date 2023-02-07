@@ -91,3 +91,7 @@
 	path = libs/fs_lib
 	url = git@aetd-git.gsfc.nasa.gov:gsfc-cfs/fs_lib.git
 	branch = develop
+[submodule "apps/mm"]
+	path = apps/mm
+	url = git@github.com:nasa/mm
+	branch = main
