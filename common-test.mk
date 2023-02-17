@@ -85,6 +85,15 @@ ALL_FM_COVERAGE_TESTS += coverage-fm-fm_cmd_utils-testrunner
 ALL_FM_COVERAGE_TESTS += coverage-fm-fm_tbl-testrunner
 ALL_CFE_COVERAGE_TESTS += $(ALL_FM_COVERAGE_TESTS)
 
+ALL_LC_COVERAGE_TESTS += coverage-lc-lc_action-testrunner
+ALL_LC_COVERAGE_TESTS += coverage-lc-lc_app-testrunner
+ALL_LC_COVERAGE_TESTS += coverage-lc-lc_cmds-testrunner
+ALL_LC_COVERAGE_TESTS += coverage-lc-lc_custom-testrunner
+ALL_LC_COVERAGE_TESTS += coverage-lc-lc_utils-testrunner
+ALL_LC_COVERAGE_TESTS += coverage-lc-lc_watch-testrunner
+ALL_CFE_COVERAGE_TESTS += $(ALL_LC_COVERAGE_TESTS)
+
+
 
 ALL_OSAL_COVERAGE_TESTS :=                      \
 	coverage-shared-binsem-testrunner			\
