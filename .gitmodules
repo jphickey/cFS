@@ -95,3 +95,7 @@
 	path = apps/mm
 	url = git@github.com:nasa/mm
 	branch = main
+[submodule "apps/cs"]
+	path = apps/cs
+	url = git@github.com:nasa/CS.git
+	branch = main
