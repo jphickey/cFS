@@ -66,10 +66,6 @@
 	path = apps/sc
 	url = git@github.com:nasa/sc
 	branch = main
-[submodule "libs/scriptengine"]
-	path = libs/scriptengine
-	url = https://github.com/jphickey/scriptengine.git
-	branch = main
 [submodule "apps/ds"]
 	path = apps/ds
 	url = git@github.com:nasa/ds
