@@ -82,6 +82,7 @@
     <Define name="MAX_MSG_ACT_TYPES" value="8" />
     <Define name="MAX_EXEC_CNT_SLOTS" value="32" />
     <Define name="MAX_MONITORED_APPS" value="32" />
+    <Define name="MAX_MONITORED_EVENTS" value="16" />
   </Package>
 
   <Package name="CFE_MISSION" shortDescription="cFE mission configuration">
