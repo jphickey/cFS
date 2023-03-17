@@ -166,9 +166,12 @@ $(NATIVE_TARGETS) \
 $(FLIGHT_TARGETS): PREP_OPTS += "$(CURDIR)/cfe"
 
 $(OSAL_TARGETS): PREP_OPTS += -DCMAKE_INSTALL_PREFIX=$(HOME)/code/local
+$(OSAL_TARGETS): DESTDIR :=
+$(OSAL_TARGETS): PREP_OPTS += -DENABLE_UNIT_TESTS=TRUE
 $(OSAL_TARGETS): PREP_OPTS += -DOSAL_OMIT_DEPRECATED=TRUE
 $(OSAL_TARGETS): PREP_OPTS += -DOSAL_SYSTEM_BSPTYPE=generic-linux
 $(OSAL_TARGETS): PREP_OPTS += -DOSAL_CONFIG_DEBUG_PERMISSIVE_MODE=on
+$(OSAL_TARGETS): PREP_OPTS += -DOSAL_VALIDATE_API=on
 $(OSAL_TARGETS): PREP_OPTS += -DOSAL_USER_C_FLAGS='-Wall -Werror'
 $(OSAL_TARGETS): PREP_OPTS += "$(CURDIR)/osal"
 
@@ -182,8 +185,6 @@ $(BPLIB_P_TARGETS) $(BPLIB_O_TARGETS):  PREP_OPTS += "$(CURDIR)/libs/bplib"
 export O
 export ARCH
 export CFG
-export PREP_OPTS
-export DESTDIR
 
 # Export VERBOSE only if it was actually set to something
 ifneq ($(VERBOSE),)
@@ -248,7 +249,7 @@ native.distclean: | rm-buildlink
 
 # A generic pattern rule to invoke a sub-make for the appliction build/install to staging area
 %/stamp.install: %/stamp.prep
-	env $(ENV_OPTS) $(MAKE) --no-print-directory -C "$(O)" $(SUBTGT_PREFIX)install
+	env $(ENV_OPTS) $(MAKE) --no-print-directory -C "$(O)" DESTDIR="$(DESTDIR)" $(SUBTGT_PREFIX)install
 	touch "$(@)"
 
 # A generic pattern rule to clean a build area
