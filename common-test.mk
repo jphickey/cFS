@@ -52,6 +52,18 @@ ALL_CFE_CORE_COVERAGE_TESTS += sbr_map_hash_UT
 
 ALL_CFE_COVERAGE_TESTS += $(ALL_CFE_CORE_COVERAGE_TESTS)
 
+ALL_CS_COVERAGE_TESTS += coverage-cs-cs_app_cmds-testrunner
+ALL_CS_COVERAGE_TESTS += coverage-cs-cs_app-testrunner
+ALL_CS_COVERAGE_TESTS += coverage-cs-cs_cmds-testrunner
+ALL_CS_COVERAGE_TESTS += coverage-cs-cs_compute-testrunner
+ALL_CS_COVERAGE_TESTS += coverage-cs-cs_eeprom_cmds-testrunner
+ALL_CS_COVERAGE_TESTS += coverage-cs-cs_init-testrunner
+ALL_CS_COVERAGE_TESTS += coverage-cs-cs_memory_cmds-testrunner
+ALL_CS_COVERAGE_TESTS += coverage-cs-cs_table_cmds-testrunner
+ALL_CS_COVERAGE_TESTS += coverage-cs-cs_table_processing-testrunner
+ALL_CS_COVERAGE_TESTS += coverage-cs-cs_utils-testrunner
+ALL_CFE_COVERAGE_TESTS += $(ALL_CS_COVERAGE_TESTS)
+
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_app-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_cfdp-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_cfdp_r-testrunner

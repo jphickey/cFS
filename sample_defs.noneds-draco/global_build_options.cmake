@@ -26,3 +26,9 @@ endif (OMIT_DEPRECATED)
 
 set(MISSION_RESOURCEID_MODE STRICT)
 
+add_compile_options(
+  -Wstrict-prototypes         # Warn about missing prototypes
+  -Wwrite-strings             # Warn if not treating string literals as "const"
+  -Wpointer-arith             # Warn about suspicious pointer operations
+  -Wsizeof-pointer-memaccess  # Suspicious
+)
