@@ -32,4 +32,5 @@ add_compile_options(
     -Werror                     # Treat warnings as errors (code should be clean)
     -Wno-format-truncation      # Inhibit printf-style format truncation warnings
     -Wno-stringop-truncation    # Inhibit string operation truncation warnings
+    -fstrict-aliasing
 )

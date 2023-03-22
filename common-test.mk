@@ -109,15 +109,24 @@ ALL_CFE_COVERAGE_TESTS += $(ALL_LC_COVERAGE_TESTS)
 ALL_DS_COVERAGE_TESTS += coverage-ds-ds_app-testrunner
 ALL_DS_COVERAGE_TESTS += coverage-ds-ds_cmds-testrunner
 ALL_DS_COVERAGE_TESTS += coverage-ds-ds_file-testrunner
+ALL_DS_COVERAGE_TESTS += coverage-ds-ds_dispatch-testrunner
 ALL_DS_COVERAGE_TESTS += coverage-ds-ds_table-testrunner
 ALL_CFE_COVERAGE_TESTS += $(ALL_DS_COVERAGE_TESTS)
 
 ALL_HS_COVERAGE_TESTS += coverage-hs-hs_app-testrunner
 ALL_HS_COVERAGE_TESTS += coverage-hs-hs_cmds-testrunner
+ALL_HS_COVERAGE_TESTS += coverage-hs-hs_custom_dispatch-testrunner
 ALL_HS_COVERAGE_TESTS += coverage-hs-hs_custom-testrunner
+ALL_HS_COVERAGE_TESTS += coverage-hs-hs_dispatch-testrunner
 ALL_HS_COVERAGE_TESTS += coverage-hs-hs_monitors-testrunner
 ALL_HS_COVERAGE_TESTS += coverage-hs-hs_utils-testrunner
 ALL_CFE_COVERAGE_TESTS += $(ALL_HS_COVERAGE_TESTS)
+
+ALL_HK_COVERAGE_TESTS += coverage-hk-hk_app-testrunner
+ALL_HK_COVERAGE_TESTS += coverage-hk-hk_dispatch-testrunner
+ALL_HK_COVERAGE_TESTS += coverage-hk-hk_utils-testrunner
+ALL_CFE_COVERAGE_TESTS += $(ALL_HK_COVERAGE_TESTS)
+
 
 ALL_OSAL_COVERAGE_TESTS :=                      \
 	coverage-shared-binsem-testrunner			\
