@@ -116,7 +116,7 @@ LIST(APPEND cpu1_APPLIST hk)
 LIST(APPEND cpu1_APPLIST ds)
 LIST(APPEND cpu1_APPLIST hs)
 #LIST(APPEND cpu1_APPLIST cfe_assert)
-#SET(cpu1_PSP_MODULELIST eeprom_stub)
+SET(cpu1_PSP_MODULELIST iodriver unsock_intf linux_sysmon)
 SET(cpu1_FILELIST cfe_es_startup.scr)
 
 #SET(cpu1_STATIC_SYMLIST
