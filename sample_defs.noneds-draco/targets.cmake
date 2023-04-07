@@ -110,7 +110,7 @@ SET(cpu1_APPLIST cfe_assert)
 SET(cpu1_APPLIST cfe_assert ci_lab to_lab sch_lab cf fm lc sc hk ds hs mm sgw cs)
 SET(cpu1_STATIC_APPLIST sample_app sample_lib fs_lib)
 LIST(APPEND cpu1_STATIC_APPLIST bp bplib)
-SET(cpu1_PSP_MODULELIST iodriver unsock_intf)
+SET(cpu1_PSP_MODULELIST unsock_intf)
 SET(cpu1_FILELIST cfe_es_startup.scr)
 
 SET(cpu1_STATIC_SYMLIST
