@@ -101,7 +101,7 @@ SET(FT_INSTALL_SUBDIR "host/functional-test")
 # Each target board can have its own HW arch selection and set of included apps
 SET(MISSION_CPUNAMES
     cpu1
-#    cpu2
+    cpu2
 )
 
 SET(cpu1_PROCESSORID 1)
@@ -116,7 +116,7 @@ LIST(APPEND cpu1_APPLIST hk)
 LIST(APPEND cpu1_APPLIST ds)
 LIST(APPEND cpu1_APPLIST hs)
 #LIST(APPEND cpu1_APPLIST cfe_assert)
-SET(cpu1_PSP_MODULELIST iodriver unsock_intf linux_sysmon)
+SET(cpu1_PSP_MODULELIST unsock_intf)
 SET(cpu1_FILELIST cfe_es_startup.scr)
 
 #SET(cpu1_STATIC_SYMLIST
@@ -126,6 +126,7 @@ SET(cpu1_FILELIST cfe_es_startup.scr)
 # CPU2 example.  This is not built by default anymore but
 # serves as an example of how one would configure multiple cpus.
 SET(cpu2_PROCESSORID 2)
+SET(cpu2_APPLIST ci_lab to_lab sch_lab)
 SET(cpu2_FILELIST cfe_es_startup.scr)
 
 #list(REMOVE_ITEM MISSION_GLOBAL_APPLIST cfe_testcase)
