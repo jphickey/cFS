@@ -1,15 +1,15 @@
 
 message("inside install_custom cpu1")
-target_include_directories(cpu1_sch_lab_table_sch_lab_table PRIVATE
+target_include_directories(tblobj_cpu1_sch_lab PRIVATE
     $<TARGET_PROPERTY:cf,INCLUDE_DIRECTORIES>
     $<TARGET_PROPERTY:sc,INCLUDE_DIRECTORIES>
 )
 
-if (TARGET cpu1_bp_bp_flowtable)
-target_include_directories(cpu1_sch_lab_table_sch_lab_table PRIVATE
+if (TARGET tblobj_cpu1_bp)
+target_include_directories(tblobj_cpu1_sch_lab PRIVATE
     $<TARGET_PROPERTY:bp,INCLUDE_DIRECTORIES>
 )
-target_include_directories(cpu1_bp_bp_flowtable PRIVATE
+target_include_directories(tblobj_cpu1_bp PRIVATE
     $<TARGET_PROPERTY:cf,INCLUDE_DIRECTORIES>
 )
 endif()
