@@ -25,7 +25,9 @@
 */
 #include "ci_lab_msgids.h"
 #include "to_lab_msgids.h"
+#ifdef HAVE_SAMPLE_APP
 #include "sample_app_msgids.h"
+#endif
 #include "hs_msgids.h"
 
 /*
@@ -46,7 +48,9 @@ SCH_LAB_ScheduleTable_t SCH_LAB_ScheduleTable = {.TickRate = 1,
                 {CFE_SB_MSGID_WRAP_VALUE(CFE_TBL_SEND_HK_MID), 4, 0},
                 {CFE_SB_MSGID_WRAP_VALUE(CI_LAB_SEND_HK_MID), 4, 0},
                 {CFE_SB_MSGID_WRAP_VALUE(TO_LAB_SEND_HK_MID), 4, 0},
+#ifdef HAVE_SAMPLE_APP
                 {CFE_SB_MSGID_WRAP_VALUE(SAMPLE_APP_SEND_HK_MID), 4, 0},
+#endif
                 {CFE_SB_MSGID_WRAP_VALUE(HS_SEND_HK_MID),       4, 0},
                 {CFE_SB_MSGID_WRAP_VALUE(HS_WAKEUP_MID),       1, 0},
 }};

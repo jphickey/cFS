@@ -33,7 +33,9 @@
 */
 #include "to_lab_msgids.h"
 #include "ci_lab_msgids.h"
+#ifdef HAVE_SAMPLE_APP
 #include "sample_app_msgids.h"
+#endif
 #include "hs_msgids.h"
 
 TO_LAB_Subs_t TO_LAB_Subs = {.Subs = {/* CFS App Subscriptions */
