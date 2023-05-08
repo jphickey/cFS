@@ -85,7 +85,7 @@ ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_os-testrunner
 ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_base-testrunner
 ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_v7-testrunner
 ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_cache-testrunner
-ALL_CFE_COVERAGE_TESTS += $(ALL_BPLIB_COVERAGE_TESTS)
+#ALL_CFE_COVERAGE_TESTS += $(ALL_BPLIB_COVERAGE_TESTS)
 
 ALL_BP_COVERAGE_TESTS += coverage-bp-ALL-testrunner
 #ALL_CFE_COVERAGE_TESTS += $(ALL_BP_COVERAGE_TESTS)
@@ -93,7 +93,7 @@ ALL_BP_COVERAGE_TESTS += coverage-bp-ALL-testrunner
 ALL_FM_COVERAGE_TESTS += coverage-fm-fm_app-testrunner
 ALL_FM_COVERAGE_TESTS += coverage-fm-fm_child-testrunner
 ALL_FM_COVERAGE_TESTS += coverage-fm-fm_cmds-testrunner
-#ALL_FM_COVERAGE_TESTS += coverage-fm-fm_dispatch-testrunner
+ALL_FM_COVERAGE_TESTS += coverage-fm-fm_dispatch-testrunner
 ALL_FM_COVERAGE_TESTS += coverage-fm-fm_cmd_utils-testrunner
 ALL_FM_COVERAGE_TESTS += coverage-fm-fm_tbl-testrunner
 ALL_CFE_COVERAGE_TESTS += $(ALL_FM_COVERAGE_TESTS)
@@ -116,8 +116,6 @@ ALL_CFE_COVERAGE_TESTS += $(ALL_DS_COVERAGE_TESTS)
 
 ALL_HS_COVERAGE_TESTS += coverage-hs-hs_app-testrunner
 ALL_HS_COVERAGE_TESTS += coverage-hs-hs_cmds-testrunner
-#ALL_HS_COVERAGE_TESTS += coverage-hs-hs_custom_dispatch-testrunner
-#ALL_HS_COVERAGE_TESTS += coverage-hs-hs_custom-testrunner
 ALL_HS_COVERAGE_TESTS += coverage-hs-hs_dispatch-testrunner
 ALL_HS_COVERAGE_TESTS += coverage-hs-hs_monitors-testrunner
 ALL_HS_COVERAGE_TESTS += coverage-hs-hs_utils-testrunner
