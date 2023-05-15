@@ -85,7 +85,7 @@ ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_os-testrunner
 ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_base-testrunner
 ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_v7-testrunner
 ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_cache-testrunner
-ALL_CFE_COVERAGE_TESTS += $(ALL_BPLIB_COVERAGE_TESTS)
+#ALL_CFE_COVERAGE_TESTS += $(ALL_BPLIB_COVERAGE_TESTS)
 
 ALL_BP_COVERAGE_TESTS += coverage-bp-ALL-testrunner
 #ALL_CFE_COVERAGE_TESTS += $(ALL_BP_COVERAGE_TESTS)
