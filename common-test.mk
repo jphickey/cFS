@@ -38,6 +38,7 @@ ALL_OSAL_PARAM_TESTS :=          	\
 
 
 ALL_CFE_CORE_COVERAGE_TESTS :=      \
+    coverage-msg-ALL-testrunner     \
 	coverage-es-ALL-testrunner      \
     coverage-evs-ALL-testrunner     \
     coverage-fs-ALL-testrunner      \
@@ -45,7 +46,6 @@ ALL_CFE_CORE_COVERAGE_TESTS :=      \
     coverage-tbl-ALL-testrunner     \
     coverage-time-ALL-testrunner
 
-#ALL_CFE_CORE_COVERAGE_TESTS += msg_UT
 ALL_CFE_CORE_COVERAGE_TESTS += resourceid_UT
 ALL_CFE_CORE_COVERAGE_TESTS += sbr_map_direct_UT
 ALL_CFE_CORE_COVERAGE_TESTS += sbr_map_hash_UT

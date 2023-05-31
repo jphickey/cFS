@@ -32,13 +32,13 @@ CFE_TBL_FileDef_t CFE_TBL_FileDef =
     "BP_APP.FlowTable",
     "Configuration of bundle flows",
     "bp_flowtable.tbl",
-    sizeof(BP_FlowTbl_t)
+    sizeof(BP_FlowTable_t)
 };
 
 /*
 ** Table contents
 */
-BP_FlowTbl_t BP_FlowTable =
+BP_FlowTable_t BP_FlowTable =
 {
     .LocalNodeIpn = 13,
     .Flows =

@@ -80,7 +80,7 @@ O_bplib_o  ?= build-bplib_o
 
 # The "stamp" target names are associated with a file in the build dir to indicate last run time
 # The "nostamp" target names do not have this, and are always executed
-STAMPTGT_NAMES    := prep compile install test lcov detaildesign usersguide osalguide clean
+STAMPTGT_NAMES    := prep compile install test lcov detaildesign usersguide osalguide clean cleantest
 NOSTAMPTGT_NAMES  := distclean docs
 
 # The config names is a list of configurations to build
@@ -253,6 +253,11 @@ native.distclean: | rm-buildlink
 %/stamp.clean: %/stamp.prep %/stamp.compile.rm-stamp %/stamp.install.rm-stamp %/stamp.test.rm-stamp %/stamp.lcov.rm-stamp
 	$(MAKE) --no-print-directory -C "$(O)" $(SUBTGT_PREFIX)clean
 	touch "$(@)"
+
+# A generic pattern rule to invoke a sub-make for running tests
+%/stamp.cleantest: %/stamp.install
+	$(MAKE) --no-print-directory -f $(CFG)-test.mk clean_lcov clean_logs
+	$(MAKE) $(CFG).test
 
 # A generic pattern rule to invoke a sub-make for running tests
 %/stamp.test: %/stamp.install
