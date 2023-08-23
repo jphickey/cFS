@@ -101,16 +101,16 @@ SET(FT_INSTALL_SUBDIR "host/functional-test")
 # Each target board can have its own HW arch selection and set of included apps
 SET(MISSION_CPUNAMES
     cpu1
-    #cpu2
+    cpu2
 )
 
 SET(cpu1_PROCESSORID 1)
-SET(cpu1_APPLIST cfe_assert)
+#SET(cpu1_APPLIST )
 #SET(cpu1_APPLIST ci_lab to_lab sch_lab)
 SET(cpu1_APPLIST cfe_assert sample_app sample_lib ci_lab to_lab sch_lab cf fm lc sc hk ds hs mm sgw cs)
 #SET(cpu1_STATIC_APPLIST sample_app sample_lib fs_lib)
 LIST(APPEND cpu1_APPLIST bp bplib)
-LIST(APPEND cpu1_APPLIST cfe_testcase)
+LIST(APPEND cpu1_APPLIST cfe_assert cfe_testcase)
 SET(cpu1_PSP_MODULELIST unsock_intf)
 SET(cpu1_FILELIST cfe_es_startup.scr)
 

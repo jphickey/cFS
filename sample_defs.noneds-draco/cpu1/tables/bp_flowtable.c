@@ -48,7 +48,7 @@ BP_FlowTable_t BP_FlowTable =
     .Flows =
     {
         {   /* Flow 0 */
-            .Name = "HKT",
+            .Name = "CFDP",
             .Enabled = true,
             .PipeDepth = BP_APP_READ_LIMIT,
             .SrcServ = 1,

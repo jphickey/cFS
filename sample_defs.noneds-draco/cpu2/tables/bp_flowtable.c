@@ -11,13 +11,17 @@
 ** Includes
 *************************************************************************/
 
-#include <stdint.h>
+#include <common_types.h>
+
+#include "bplib.h"
+#include "bp_tbl.h"
+#include "bp_platform_cfg.h"
 
 #include "cfe.h"
-#include "bp_cfg.h"
-#include "bp_flow.h"
-#include "bplib.h"
 #include "cfe_tbl_filedef.h"
+#include "cfe_msgids.h"
+
+#include "cf_msgids.h"
 
 /************************************************************************
 ** Data
@@ -44,7 +48,7 @@ BP_FlowTable_t BP_FlowTable =
     .Flows =
     {
         {   /* Flow 0 */
-            .Name = "HKT",
+            .Name = "CFDP",
             .Enabled = true,
             .PipeDepth = BP_APP_READ_LIMIT,
             .SrcServ = 1,
