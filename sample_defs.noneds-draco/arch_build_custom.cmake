@@ -33,4 +33,10 @@ add_compile_options(
     -Wno-format-truncation      # Inhibit printf-style format truncation warnings
     -Wno-stringop-truncation    # Inhibit string operation truncation warnings
     -fstrict-aliasing
+    -fstack-protector-all
+    -fstack-check
+    $<$<CONFIG:Debug>:-O1>
 )
+
+add_compile_definitions(_FORTIFY_SOURCE=2)
+
