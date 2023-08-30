@@ -182,8 +182,11 @@ ALL_OSAL_COVERAGE_TESTS :=                      \
     coverage-vxworks-timebase-testrunner        \
 	coverage-ut-mcp750-vxworks-testrunner
 
+ALL_PSP_COVERAGE_TESTS :=                      \
+	coverage-pspmod-linux_sysmon-testrunner
+
 ALL_CFE_TEST_LIST := $(addprefix $(INSTALL_DIR)/$(CPUNAME)/, \
-    $(ALL_CFE_COVERAGE_TESTS)                            \
+    $(ALL_CFE_COVERAGE_TESTS) $(ALL_PSP_COVERAGE_TESTS)      \
 )
 
 ALL_OS_TEST_COV_LIST := $(addprefix $(INSTALL_DIR)/$(CPUNAME)/, \
