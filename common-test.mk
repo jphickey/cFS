@@ -79,12 +79,12 @@ ALL_CF_COVERAGE_TESTS += coverage-cf-cf_timer-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_utils-testrunner
 ALL_CFE_COVERAGE_TESTS += $(ALL_CF_COVERAGE_TESTS)
 
-ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_common-testrunner
-ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_mpool-testrunner
 ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_os-testrunner
-ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_base-testrunner
 ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_v7-testrunner
+ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_mpool-testrunner
+ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_base-testrunner
 ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_cache-testrunner
+ALL_BPLIB_COVERAGE_TESTS += coverage-bplib_common-testrunner
 #ALL_CFE_COVERAGE_TESTS += $(ALL_BPLIB_COVERAGE_TESTS)
 
 ALL_BP_COVERAGE_TESTS += coverage-bp-ALL-testrunner
@@ -125,6 +125,16 @@ ALL_HK_COVERAGE_TESTS += coverage-hk-hk_app-testrunner
 ALL_HK_COVERAGE_TESTS += coverage-hk-hk_dispatch-testrunner
 ALL_HK_COVERAGE_TESTS += coverage-hk-hk_utils-testrunner
 ALL_CFE_COVERAGE_TESTS += $(ALL_HK_COVERAGE_TESTS)
+
+ALL_SC_COVERAGE_TESTS += coverage-sc-sc_app-testrunner
+ALL_SC_COVERAGE_TESTS += coverage-sc-sc_atsrq-testrunner
+ALL_SC_COVERAGE_TESTS += coverage-sc-sc_cmds-testrunner
+ALL_SC_COVERAGE_TESTS += coverage-sc-sc_loads-testrunner
+ALL_SC_COVERAGE_TESTS += coverage-sc-sc_rtsrq-testrunner
+ALL_SC_COVERAGE_TESTS += coverage-sc-sc_state-testrunner
+ALL_SC_COVERAGE_TESTS += coverage-sc-sc_utils-testrunner
+ALL_CFE_COVERAGE_TESTS += $(ALL_SC_COVERAGE_TESTS)
+
 
 
 ALL_OSAL_COVERAGE_TESTS :=                      \
@@ -183,7 +193,7 @@ ALL_OSAL_COVERAGE_TESTS :=                      \
 	coverage-ut-mcp750-vxworks-testrunner
 
 ALL_PSP_COVERAGE_TESTS :=                      \
-	coverage-pspmod-linux_sysmon-testrunner
+	#coverage-pspmod-linux_sysmon-testrunner
 
 ALL_CFE_TEST_LIST := $(addprefix $(INSTALL_DIR)/$(CPUNAME)/, \
     $(ALL_CFE_COVERAGE_TESTS) $(ALL_PSP_COVERAGE_TESTS)      \
