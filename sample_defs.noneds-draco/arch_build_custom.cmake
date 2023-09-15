@@ -35,7 +35,7 @@ add_compile_options(
     -fstrict-aliasing
     -fstack-protector-all
     -fstack-check
-    $<$<CONFIG:Debug>:-O1>
+    #$<$<CONFIG:Debug>:-O1>
 )
 
 add_compile_definitions(_FORTIFY_SOURCE=2)
