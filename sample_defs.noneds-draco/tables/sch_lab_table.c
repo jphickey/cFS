@@ -21,6 +21,8 @@
 #include "cfe_sb.h" /* Required to use the CFE_SB_MSGID_WRAP_VALUE macro */
 
 #include "cf_msgids.h"
+#include "bp_msgids.h"
+#include "bp_msg.h"
 
 /*
 ** Include headers for message IDs here
@@ -100,7 +102,7 @@ SCH_LAB_ScheduleTable_t SCH_TBL_Structure = {.TickRate = 10,
 #endif
                 {CFE_SB_MSGID_WRAP_VALUE(CF_SEND_HK_MID), 40, 0},
                 {CFE_SB_MSGID_WRAP_VALUE(CF_WAKE_UP_MID), 1, 0},
-                //{CFE_SB_MSGID_WRAP_VALUE(BP_WAKEUP_MID), 1, BP_WAKEUP_PROCESS_CC},
+                {CFE_SB_MSGID_WRAP_VALUE(BP_WAKEUP_MID), 1, BP_WAKEUP_PROCESS_CC},
 }};
 
 /*

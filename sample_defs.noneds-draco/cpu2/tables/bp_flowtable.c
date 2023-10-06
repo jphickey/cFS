@@ -11,13 +11,17 @@
 ** Includes
 *************************************************************************/
 
-#include <stdint.h>
+#include <common_types.h>
+
+#include "bplib.h"
+#include "bp_tbl.h"
+#include "bp_platform_cfg.h"
 
 #include "cfe.h"
-#include "bp_cfg.h"
-#include "bp_flow.h"
-#include "bplib.h"
 #include "cfe_tbl_filedef.h"
+#include "cfe_msgids.h"
+
+#include "cf_msgids.h"
 
 /************************************************************************
 ** Data
@@ -32,19 +36,19 @@ CFE_TBL_FileDef_t CFE_TBL_FileDef =
     "BP_APP.FlowTable",
     "Configuration of bundle flows",
     "bp_flowtable.tbl",
-    sizeof(BP_FlowTbl_t)
+    sizeof(BP_FlowTable_t)
 };
 
 /*
 ** Table contents
 */
-BP_FlowTbl_t BP_FlowTable =
+BP_FlowTable_t BP_FlowTable =
 {
     .LocalNodeIpn = 13,
     .Flows =
     {
         {   /* Flow 0 */
-            .Name = "HKT",
+            .Name = "CFDP",
             .Enabled = true,
             .PipeDepth = BP_APP_READ_LIMIT,
             .SrcServ = 1,
