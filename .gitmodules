@@ -1,7 +1,7 @@
 [submodule "cfe"]
 	path = cfe
-	url = git@github.com:jphickey/cFE.git
-	branch = techdev-sois-eds-draco-preview-20230113
+	url = https://github.com/jphickey/cFE.git
+	branch = techdev-sois-eds
 [submodule "osal"]
 	path = osal
 	url = git@github.com:jphickey/osal.git
@@ -12,82 +12,38 @@
   	branch = techdev-iodriver
 [submodule "apps/ci_lab"]
 	path = apps/ci_lab
-	url = git@github.com:jphickey/ci_lab.git
-	branch = techdev-sois-eds-draco-preview-20230113
+	url = https://github.com/jphickey/ci_lab.git
+	branch = techdev-sois-eds
 [submodule "apps/sample_app"]
 	path = apps/sample_app
-	url = git@github.com:jphickey/sample_app.git
-	branch = techdev-sois-eds-draco-preview-20230113
+	url = https://github.com/jphickey/sample_app.git
+	branch = techdev-sois-eds
 [submodule "apps/sample_lib"]
 	path = libs/sample_lib
 	url = https://github.com/nasa/sample_lib.git
 	branch = main
 [submodule "apps/sch_lab"]
 	path = apps/sch_lab
-	url = git@github.com:jphickey/sch_lab.git
-	branch = techdev-sois-eds-draco-preview-20230113
+	url = https://github.com/jphickey/sch_lab.git
+	branch = techdev-sois-eds
 [submodule "apps/to_lab"]
 	path = apps/to_lab
-	url = git@github.com:jphickey/to_lab.git
-	branch = techdev-sois-eds-draco-preview-20230113
+	url = https://github.com/jphickey/to_lab.git
+	branch = techdev-sois-eds
 [submodule "tools/cFS-GroundSystem"]
 	path = tools/cFS-GroundSystem
 	url = https://github.com/nasa/cFS-GroundSystem.git
-    branch = main
-[submodule "apps/bp"]
-	path = apps/bp
-	url = git@github.com:nasa/bp
-	branch = main
-[submodule "libs/bplib"]
-	path = libs/bplib
-	url = git@github.com:nasa/bplib
-	branch = main
-[submodule "apps/cf"]
-	path = apps/cf
-	url = git@github.com:nasa/cf
-	branch = main
-[submodule "apps/sgw"]
-	path = apps/sgw
-	url = joe@phlobus.net:gitrepo/sgw
-	branch = main
-[submodule "fm"]
-	path = apps/fm
-	url = git@github.com:nasa/fm
-	branch = main
+  branch = main
+[submodule "tools/elf2cfetbl"]
+	path = tools/elf2cfetbl
+	url = https://github.com/nasa/elf2cfetbl.git
+  branch = main
+[submodule "tools/tblCRCTool"]
+	path = tools/tblCRCTool
+	url = https://github.com/nasa/tblCRCTool.git
+  branch = main
 [submodule "tools/eds"]
 	path = tools/eds
-	url = https://github.com/nasa/EdsLib.git
-	branch = main
-[submodule "LC"]
-	path = apps/lc
-	url = git@github.com:nasa/LC.git
-	branch = main
-[submodule "apps/sc"]
-	path = apps/sc
-	url = git@github.com:nasa/sc
-	branch = main
-[submodule "apps/ds"]
-	path = apps/ds
-	url = git@github.com:nasa/ds
-	branch = main
-[submodule "apps/hk"]
-	path = apps/hk
-	url = git@github.com:nasa/hk
-	branch = main
-[submodule "apps/hs"]
-	path = apps/hs
-	url = git@github.com:nasa/HS
+	url = https://github.com/jphickey/EdsLib.git
 	branch = main
 
-[submodule "libs/fs_lib"]
-	path = libs/fs_lib
-	url = git@aetd-git.gsfc.nasa.gov:gsfc-cfs/fs_lib.git
-	branch = develop
-[submodule "apps/mm"]
-	path = apps/mm
-	url = git@github.com:nasa/mm
-	branch = main
-[submodule "apps/cs"]
-	path = apps/cs
-	url = git@github.com:nasa/CS.git
-	branch = main
