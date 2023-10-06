@@ -17,7 +17,7 @@
  ************************************************************************/
 
 #include "cfe_tbl_filedef.h" /* Required to obtain the CFE_TBL_FILEDEF macro definition */
-#include "sch_lab_table.h"
+#include "sch_lab_tbl.h"
 #include "cfe_sb.h" /* Required to use the CFE_SB_MSGID_WRAP_VALUE macro */
 
 /*

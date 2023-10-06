@@ -101,7 +101,7 @@ SET(FT_INSTALL_SUBDIR "host/functional-test")
 # Each target board can have its own HW arch selection and set of included apps
 SET(MISSION_CPUNAMES
     cpu1
-    cpu2
+    #cpu2
 )
 
 SET(cpu1_PROCESSORID 1)
