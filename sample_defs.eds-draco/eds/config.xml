@@ -31,6 +31,21 @@
     <Define name="BITS_PER_APPMON_ENABLE" value="32" />
   </Package>
 
+  <Package name="SC">
+    <Define name="NUMBER_OF_ATS" value="2" />
+    <Define name="NUMBER_OF_RTS" value="64" />
+    <Define name="MAX_ATS_CMDS" value="1000" />
+  </Package>
+
+  <Package name="CI_LAB">
+    <Define name="BASE_UDP_PORT" value="1234" />
+  </Package>
+
+  <Package name="TO_LAB">
+    <Define name="TLM_PORT" value="1235" />
+    <Define name="MAX_SUBSCRIPTIONS" value="32" />
+  </Package>
+
   <Package name="CFE_EVS" shortDescription="Event Services Configuration">
      <!-- The bitmasks do not yet have a way to directly associate with the data structure yet -->
      <Define name="DEBUG_BIT" value="0x0001" />
