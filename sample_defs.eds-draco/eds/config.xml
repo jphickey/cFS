@@ -35,6 +35,8 @@
     <Define name="NUMBER_OF_ATS" value="2" />
     <Define name="NUMBER_OF_RTS" value="64" />
     <Define name="MAX_ATS_CMDS" value="1000" />
+    <Define name="PACKET_MIN_SIZE" value="8" />
+    <Define name="PACKET_MAX_SIZE" value="256" />
   </Package>
 
   <Package name="CI_LAB">
