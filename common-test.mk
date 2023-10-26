@@ -3,7 +3,7 @@ CPUNAME ?= cpu1
 INSTALL_DIR ?= $(O)/exe
 
 COMPILED_MODULE_LIST := $(shell awk  '/@.*_VERSION@/ { app = gensub (/@(\w+)_VERSION@/, "\\1", 1, $$3); print toupper(app); }' $(O)/cfe_module_version.in)
-TESTABLE_MODULE_LIST := FM CS LC SC HK DS HS MM CS BP BPLIB
+TESTABLE_MODULE_LIST := SAMPLE_APP FM CS LC SC HK DS HS MM CS BP BPLIB
 MODULE_LIST := $(filter $(COMPILED_MODULE_LIST),$(TESTABLE_MODULE_LIST))
 #$(error MODULE_LIST=$(MODULE_LIST))
 
@@ -130,6 +130,11 @@ ALL_SC_COVERAGE_TESTS += coverage-sc-sc_loads-testrunner
 ALL_SC_COVERAGE_TESTS += coverage-sc-sc_rtsrq-testrunner
 ALL_SC_COVERAGE_TESTS += coverage-sc-sc_state-testrunner
 ALL_SC_COVERAGE_TESTS += coverage-sc-sc_utils-testrunner
+
+ALL_SAMPLE_APP_COVERAGE_TESTS += coverage-sample_app-sample_app-testrunner
+ALL_SAMPLE_APP_COVERAGE_TESTS += coverage-sample_app-sample_app_dispatch-testrunner
+ALL_SAMPLE_APP_COVERAGE_TESTS += coverage-sample_app-sample_app_cmds-testrunner
+ALL_SAMPLE_APP_COVERAGE_TESTS += coverage-sample_app-sample_app_utils-testrunner
 
 ALL_CFS_APP_COVERAGE_TESTS := $(foreach MOD,$(MODULE_LIST),$(ALL_$(MOD)_COVERAGE_TESTS))
 
