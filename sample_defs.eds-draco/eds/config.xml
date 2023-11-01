@@ -27,6 +27,10 @@
 -->
 <DesignParameters>
 
+  <Package name="SAMPLE_APP">
+    <Define name="STRING_VAL_LEN" value="10" />
+  </Package>
+
   <Package name="HS">
     <Define name="BITS_PER_APPMON_ENABLE" value="32" />
   </Package>
