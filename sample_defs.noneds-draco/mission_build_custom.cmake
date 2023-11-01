@@ -28,3 +28,12 @@ add_compile_options(
 add_definitions(
     -D_XOPEN_SOURCE=600
 )
+
+if (CMAKE_C_COMPILER_VERSION VERSION_GREATER_EQUAL  8.0.0)
+add_compile_options(
+    -Wno-stringop-overflow
+    -Wno-stringop-truncation
+    -Wno-format-overflow
+    -Wno-format-truncation
+)
+endif()

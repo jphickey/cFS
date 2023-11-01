@@ -14,4 +14,7 @@ target_include_directories(bp.table INTERFACE
 )
 endif()
 
+target_compile_definitions(sc PUBLIC SC_OMIT_DEPRECATED)
+
+
 add_cfe_tables(sample_app alt_sample_tbl.c alt2_sample_tbl2.c)

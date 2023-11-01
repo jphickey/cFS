@@ -27,7 +27,7 @@
 ** The following is an example of the declaration statement that defines the desired
 ** contents of the table image.
 */
-SAMPLE_APP_Table_t SampleAppTable = {3, 4};
+SAMPLE_APP_ExampleTable_t ExampleTable = {3, 4};
 
 /*
 ** The macro below identifies:
@@ -36,4 +36,4 @@ SAMPLE_APP_Table_t SampleAppTable = {3, 4};
 **    3) a brief description of the contents of the file image
 **    4) the desired name of the table image binary file that is cFE compatible
 */
-CFE_TBL_FILEDEF(SampleAppTable, SAMPLE_APP.SampleAppTable, Table Utility Test Table, alt_sample_tbl.tbl)
+CFE_TBL_FILEDEF(ExampleTable, SAMPLE_APP.ExampleTable, Table Utility Test Table, alt_sample_tbl.tbl)

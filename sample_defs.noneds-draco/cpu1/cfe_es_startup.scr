@@ -1,14 +1,16 @@
 CFE_APP, ci_lab,        CI_Lab_AppMain,     CI_LAB_APP,   60,   65536, 0x0, 0;
 CFE_APP, to_lab,        TO_LAB_AppMain,     TO_LAB_APP,   70,   65536, 0x0, 0;
 CFE_APP, sch_lab,       SCH_Lab_AppMain,    SCH_LAB_APP,  80,   65536, 0x0, 0;
-CFE_APP, hs,            HS_AppMain,         HS,       55,   65536, 0x0, 0;
+CFE_LIB, sample_lib,    SAMPLE_LIB_Init,     SAMPLE_LIB,    0,    0,     0x0, 0;
+CFE_APP, sample_app,    SAMPLE_APP_Main,     SAMPLE_APP,  80,   65536, 0x0, 0;
+!CFE_APP, sgw,           SGW_AppMain,        SGW_APP,      55,   65536, 0x0, 0;
+CFE_APP, hs,            HS_AppMain,         HS,          55,   65536, 0x0, 0;
 CFE_APP, cf,            CF_AppMain,         CF,           65,   65536, 0x0, 0;
 CFE_LIB, bplib,         NULL,               BP_LIB,       0,    0,     0x0, 0;
 CFE_APP, bp,            BP_AppMain,         BP_APP,       55,   65536, 0x0, 0;
 CFE_APP, sc,            SC_AppMain,         SC,       55,   65536, 0x0, 0;
 CFE_APP, fm,            FM_AppMain,         FM,       55,   65536, 0x0, 0;
 CFE_APP, lc,            LC_AppMain,         LC,       55,   65536, 0x0, 0;
-!CFE_APP, sgw,           SGW_AppMain,        SGW_APP,      55,   65536, 0x0, 0;
 CFE_LIB, cfe_assert,    CFE_Assert_LibInit, ASSERT_LIB,    0,   0,     0x0, 0;
 !CFE_APP, cfe_testcase,  CFE_TestMain,       CFE_TEST_APP, 100,   65536, 0x0, 0;
 !

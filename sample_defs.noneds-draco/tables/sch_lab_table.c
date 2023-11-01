@@ -17,12 +17,17 @@
  ************************************************************************/
 
 #include "cfe_tbl_filedef.h" /* Required to obtain the CFE_TBL_FILEDEF macro definition */
-#include "sch_lab_table.h"
+#include "sch_lab_tbl.h"
 #include "cfe_sb.h" /* Required to use the CFE_SB_MSGID_WRAP_VALUE macro */
 
+#ifdef HAVE_CF_APP
 #include "cf_msgids.h"
+#endif
+
+#ifdef HAVE_BP_APP
 #include "bp_msgids.h"
 #include "bp_msg.h"
+#endif
 
 /*
 ** Include headers for message IDs here
@@ -100,9 +105,13 @@ SCH_LAB_ScheduleTable_t SCH_TBL_Structure = {.TickRate = 10,
 #ifdef HAVE_LC_APP
                 {CFE_SB_MSGID_WRAP_VALUE(LC_SEND_HK_MID),       4, 0},
 #endif
+#ifdef HAVE_CF_APP
                 {CFE_SB_MSGID_WRAP_VALUE(CF_SEND_HK_MID), 40, 0},
                 {CFE_SB_MSGID_WRAP_VALUE(CF_WAKE_UP_MID), 1, 0},
+#endif
+#ifdef HAVE_BP_APP
                 {CFE_SB_MSGID_WRAP_VALUE(BP_WAKEUP_MID), 1, BP_WAKEUP_PROCESS_CC},
+#endif
 }};
 
 /*
@@ -112,4 +121,4 @@ SCH_LAB_ScheduleTable_t SCH_TBL_Structure = {.TickRate = 10,
 **    3) a brief description of the contents of the file image
 **    4) the desired name of the table image binary file that is cFE compatible
 */
-CFE_TBL_FILEDEF(SCH_TBL_Structure, SCH_LAB_APP.SCH_LAB_SchTbl, Schedule Lab MsgID Table, sch_lab_table.tbl)
+CFE_TBL_FILEDEF(SCH_TBL_Structure, SCH_LAB_APP.ScheduleTable, Schedule Lab MsgID Table, sch_lab_table.tbl)

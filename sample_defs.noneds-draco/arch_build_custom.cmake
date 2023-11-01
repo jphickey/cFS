@@ -30,13 +30,14 @@ add_compile_options(
     -pedantic                   # Issue all the warnings demanded by strict ISO C
     -Wall                       # Warn about most questionable operations
     -Werror                     # Treat warnings as errors (code should be clean)
-    -Wno-format-truncation      # Inhibit printf-style format truncation warnings
-    -Wno-stringop-truncation    # Inhibit string operation truncation warnings
     -fstrict-aliasing
-    -fstack-protector-all
-    -fstack-check
-    #$<$<CONFIG:Debug>:-O1>
 )
 
-add_compile_definitions(_FORTIFY_SOURCE=2)
-
+if (CMAKE_C_COMPILER_VERSION VERSION_GREATER_EQUAL  8.0.0)
+add_compile_options(
+    -Wno-stringop-overflow
+    -Wno-stringop-truncation
+    -Wno-format-overflow
+    -Wno-format-truncation
+)
+endif()
