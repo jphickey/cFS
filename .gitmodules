@@ -86,3 +86,9 @@
 	path = apps/cs
 	url = git@github.com:jphickey/CS.git
 	branch = main
+[submodule "apps/fcgiapp"]
+	path = apps/fcgiapp
+	url = joe@phlobus.net:gitrepo/fcgiapp
+	branch = main
+
+
