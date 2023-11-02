@@ -41,7 +41,6 @@
 
 TO_LAB_Subs_t TO_LAB_Subs = {.Subs = {/* CFS App Subscriptions */
                                       {CFE_SB_MSGID_WRAP_VALUE(HS_HK_TLM_MID), {0, 0}, 4},
-#ifdef jphfix
                                       {CFE_SB_MSGID_WRAP_VALUE(TO_LAB_HK_TLM_MID), {0, 0}, 4},
                                       {CFE_SB_MSGID_WRAP_VALUE(TO_LAB_DATA_TYPES_MID), {0, 0}, 4},
                                       {CFE_SB_MSGID_WRAP_VALUE(CI_LAB_HK_TLM_MID), {0, 0}, 4},
@@ -60,7 +59,6 @@ TO_LAB_Subs_t TO_LAB_Subs = {.Subs = {/* CFS App Subscriptions */
 
                                       {CFE_SB_MSGID_WRAP_VALUE(CFE_ES_APP_TLM_MID), {0, 0}, 4},
                                       {CFE_SB_MSGID_WRAP_VALUE(CFE_ES_MEMSTATS_TLM_MID), {0, 0}, 4},
-#endif
                                       /* TO_LAB_UNUSED entry to mark the end of valid MsgIds */
                                       {CFE_SB_MSGID_RESERVED, {0, 0}, 0}}};
 
