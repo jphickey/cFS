@@ -1,2 +1,4 @@
 build
 build*/
+tools/elf2cfetbl/
+tools/tblCRCTool/
