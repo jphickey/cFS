@@ -92,3 +92,6 @@
 	branch = main
 
 
+[submodule "ccsds.sois"]
+	path = apps/soistest/ccsds.sois
+	url = git@github.com:rkrosley/ccsds.sois.git

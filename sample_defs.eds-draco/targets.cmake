@@ -110,6 +110,7 @@ SET(MISSION_CPUNAMES
 
 SET(cpu1_PROCESSORID 1)
 SET(cpu1_APPLIST ci_lab to_lab sch_lab bplib)
+LIST(APPEND cpu1_APPLIST soistest)
 LIST(APPEND cpu1_APPLIST scriptengine)
 LIST(APPEND cpu1_APPLIST sample_app sample_lib)
 LIST(APPEND cpu1_APPLIST list fcgiapp)
