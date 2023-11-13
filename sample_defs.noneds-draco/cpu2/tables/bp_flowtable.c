@@ -58,7 +58,6 @@ BP_FlowTable_t BP_FlowTable =
             .Lifetime = 86400,
             .Priority = BP_COS_NORMAL,
             .MaxActive = 0,
-            .Store = BP_FLASH_STORE,
             .PktTbl = {{ CFE_SB_MSGID_WRAP_VALUE(0x091a), 1, 1, BP_APP_READ_LIMIT }},
             .RecvStreamId = CFE_SB_MSGID_WRAP_VALUE(0x191a)
         },
@@ -74,7 +73,6 @@ BP_FlowTable_t BP_FlowTable =
             .Lifetime = 86400,
             .Priority = BP_COS_BULK,
             .MaxActive = 0,
-            .Store = BP_FLASH_STORE,
             .PktTbl = {{ CFE_EVS_EVENT_MSG_MID, 1, 1, BP_APP_READ_LIMIT }},
             .IOParm = "OutMID=0x08BD&InMID=0x18C1&InDepth=32"
         }
