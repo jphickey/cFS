@@ -1,2 +1,7 @@
 build
 build*/
+
+# These only exist in the EDS branch, ignore them here
+apps/fcgiapp/
+apps/soistest/
+
