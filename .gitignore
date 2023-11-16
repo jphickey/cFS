@@ -1,4 +1,6 @@
 build
 build*/
+
+# These only exist in the GSFC branch, ignore them here
 tools/elf2cfetbl/
 tools/tblCRCTool/

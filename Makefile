@@ -257,7 +257,7 @@ native.distclean: | rm-buildlink
 	env $(ENV_OPTS) $(MAKE) --no-print-directory -C "$(O)" $(SUBTGT_PREFIX)clean
 	touch "$(@)"
 
-# A generic pattern rule to invoke a sub-make for running tests
+# A generic pattern rule to invoke a sub-make for staging binaries
 %/stamp.cleantest: %/stamp.install
 	$(MAKE) --no-print-directory -f $(CFG)-test.mk clean_lcov clean_logs
 	$(MAKE) $(CFG).test
