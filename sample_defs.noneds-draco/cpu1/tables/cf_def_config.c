@@ -19,7 +19,7 @@
 
 #include "cfe.h"
 #include "cfe_tbl_filedef.h"
-#include "cf_tbldefs.h"
+#include "cf_tbl.h"
 
 CF_ConfigTable_t CF_config_table = {
     10,    /* ticks_per_second */

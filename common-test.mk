@@ -3,7 +3,7 @@ CPUNAME ?= cpu1
 INSTALL_DIR ?= $(O)/exe
 
 COMPILED_MODULE_LIST := $(shell awk  '/@.*_VERSION@/ { app = gensub (/@(\w+)_VERSION@/, "\\1", 1, $$3); print toupper(app); }' $(O)/cfe_module_version.in)
-TESTABLE_MODULE_LIST := SAMPLE_APP FM CS LC SC HK DS HS MM CS BP BPLIB
+TESTABLE_MODULE_LIST := SAMPLE_APP FM CF LC SC HK DS HS MM CS BP BPLIB
 MODULE_LIST := $(filter $(COMPILED_MODULE_LIST),$(TESTABLE_MODULE_LIST))
 #$(error MODULE_LIST=$(MODULE_LIST))
 
