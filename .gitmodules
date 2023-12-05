@@ -90,8 +90,10 @@
 	path = apps/fcgiapp
 	url = joe@phlobus.net:gitrepo/fcgiapp
 	branch = main
-
-
 [submodule "ccsds.sois"]
 	path = apps/soistest/ccsds.sois
 	url = git@github.com:rkrosley/ccsds.sois.git
+[submodule "apps/md"]
+	path = apps/md
+	url = git@github.com:nasa/md.git
+	branch = main
