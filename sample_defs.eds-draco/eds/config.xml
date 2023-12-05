@@ -38,6 +38,19 @@
     <Define name="MAX_PACKET_SIZE" value="4096" />
   </Package>
 
+  <Package name="CF">
+    <Define name="NUM_CHANNELS" value="2" />
+    <Define name="NAK_MAX_SEGMENTS" value="58" />
+    <Define name="MAX_POLLING_DIR_PER_CHAN" value="5" />
+    <Define name="MAX_PDU_SIZE" value="512" />
+    <Define name="PDU_ENCAPSULATION_EXTRA_TRAILING_BYTES" value="0" />
+<!--
+    <Define name="FILENAME_MAX_NAME" value="CFE_MISSION_MAX_FILE_LEN" />
+    <Define name="FILENAME_MAX_PATH" value="CFE_MISSION_MAX_PATH_LEN - CFE_MISSION_MAX_FILE_LEN" />
+    <Define name="FILENAME_MAX_LEN" value="CFE_MISSION_MAX_PATH_LEN" />
+-->
+  </Package>
+
   <Package name="SAMPLE_APP">
     <Define name="STRING_VAL_LEN" value="10" />
   </Package>
