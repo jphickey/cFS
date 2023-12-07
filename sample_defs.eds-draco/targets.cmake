@@ -116,13 +116,13 @@ LIST(APPEND cpu1_APPLIST sample_app sample_lib)
 LIST(APPEND cpu1_APPLIST list fcgiapp)
 LIST(APPEND cpu1_APPLIST bp)
 #LIST(APPEND cpu1_APPLIST mm)
-LIST(APPEND cpu1_APPLIST fm)
+#LIST(APPEND cpu1_APPLIST fm) # Needs EDS dispatcher
 #LIST(APPEND cpu1_APPLIST lc)
-LIST(APPEND cpu1_APPLIST cf)
+#LIST(APPEND cpu1_APPLIST cf) # Needs EDS dispatcher
 #LIST(APPEND cpu1_APPLIST sc)
-LIST(APPEND cpu1_APPLIST hk)
-LIST(APPEND cpu1_APPLIST ds)
-LIST(APPEND cpu1_APPLIST hs)
+#LIST(APPEND cpu1_APPLIST hk) # Needs EDS dispatcher
+#LIST(APPEND cpu1_APPLIST ds) # Needs EDS dispatcher
+#LIST(APPEND cpu1_APPLIST hs) # Needs EDS dispatcher
 LIST(APPEND cpu1_APPLIST cfe_assert)
 SET(cpu1_PSP_MODULELIST unsock_intf)
 SET(cpu1_FILELIST cfe_es_startup.scr)

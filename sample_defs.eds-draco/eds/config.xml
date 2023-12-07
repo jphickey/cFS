@@ -76,6 +76,10 @@
     <Define name="MAX_SUBSCRIPTIONS" value="32" />
   </Package>
 
+  <Package name="CFE_ES" shortDescription="Executive Services">
+    <Define name="PLACEHOLDER" value="1" />
+  </Package>
+
   <Package name="CFE_EVS" shortDescription="Event Services Configuration">
      <!-- The bitmasks do not yet have a way to directly associate with the data structure yet -->
      <Define name="DEBUG_BIT" value="0x0001" />
@@ -97,6 +101,14 @@
   <Package name="CFE_SB" shortDescription="Software Bus Configuration">
      <Define name="SUB_ENTRIES_PER_PKT" value="20" />
      <Define name="MSGID_BIT_SIZE" value="32" />
+  </Package>
+
+  <Package name="CFE_TBL" shortDescription="Table Services">
+    <Define name="PLACEHOLDER" value="2" />
+  </Package>
+
+  <Package name="CFE_TIME" shortDescription="Time Services">
+    <Define name="PLACEHOLDER" value="3" />
   </Package>
 
   <Package name="SCH_LAB" shortDescription="SCH_LAB configurable items">
