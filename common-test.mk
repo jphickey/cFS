@@ -78,6 +78,7 @@ ALL_CF_COVERAGE_TESTS += coverage-cf-cf_clist-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_cmd-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_codec-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_crc-testrunner
+ALL_CF_COVERAGE_TESTS += coverage-cf-cf_dispatch-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_timer-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_utils-testrunner
 
