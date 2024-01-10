@@ -118,14 +118,16 @@ $(OSAL_TARGETS):     CFG := osal
 $(BPLIB_P_TARGETS):  CFG := bplib_p
 $(BPLIB_O_TARGETS):  CFG := bplib_o
 
+$(RTEMS_TARGETS): RTEMS_VERSION := 4.11
+
 # Define the ARCH used for each target group
 $(BPLIB_P_TARGETS) \
 $(BPLIB_O_TARGETS) \
 $(OSAL_TARGETS) \
-$(NATIVE_TARGETS): ARCH := native
-$(RTEMS_TARGETS):  ARCH := i686-rtems4.11
-$(RPI_TARGETS):    ARCH := arm-raspbian-linux
-$(FLIGHT_TARGETS): ARCH := ppc7400-poky-linux
+$(NATIVE_TARGETS): ARCH = native
+$(RTEMS_TARGETS):  ARCH = i686-rtems$(RTEMS_VERSION)
+$(RPI_TARGETS):    ARCH = arm-raspbian-linux
+$(FLIGHT_TARGETS): ARCH = ppc7400-poky-linux
 
 # For all targets the O should be set to the per-config build dir
 $(ALL_TARGETS):    O = $(O_$(CFG))
@@ -156,6 +158,8 @@ $(RPI_TARGETS) \
 $(FLIGHT_TARGETS): ENV_OPTS += OMIT_DEPRECATED=true
 $(BPLIB_P_TARGETS) \
 $(FLIGHT_TARGETS): PREP_OPTS += -DCMAKE_BUILD_TYPE=release
+
+#$(RTEMS_TARGETS): PREP_OPTS += -DRTEMS_TOOLS_PREFIX=/opt/rtems-$(RTEMS_VERSION)
 
 $(RTEMS_TARGETS) \
 $(RPI_TARGETS) \
