@@ -13,6 +13,8 @@ CFE_FS_IMG ?= $(INSTALL_DIR)/$(CPUNAME)/nonvol-fs.img
 QEMU_COMMAND ?= qemu-system-i386 -m 128
 MACADDR = 00:04:9F$(shell head -c 3 /dev/urandom | hexdump -v -e '/1 ":%02X"')
 
+PARTED_CMD = /usr/sbin/parted
+
 .PHONY: run cfe-disk
 .SECONDARY: $(addsuffix .log,$(ALL_TEST_LIST)))
 
@@ -23,8 +25,8 @@ $(CFE_DISK_IMG): FS_SIZE := $(shell echo $$(($(CFE_IMG_MB) * 1048576)))
 
 $(CFE_DISK_IMG):
 	truncate -s $(FS_SIZE)  $(@)
-	parted -s $(@) -- mklabel msdos
-	parted -a none -s $(@) -- mkpart primary fat32 63s -1s
+	$(PARTED_CMD) -s $(@) -- mklabel msdos
+	$(PARTED_CMD) -a none -s $(@) -- mkpart primary fat32 63s -1s
 
 $(CFE_FS_IMG): $(O)/stamp.install
 	truncate -s $$((($(CFE_IMG_MB) * 1048576) - 32256))  $(@)
@@ -50,13 +52,18 @@ clean_img:
 %.cow: $(CFE_DISK_IMG).stamp
 	qemu-img create -o backing_file=$(notdir $(CFE_DISK_IMG)),backing_fmt=raw -f qcow2 $(@)
 
+ifeq (RTEMS_VERSION,5)
+APPEND_OPTS += --console=/dev/com1
+endif
+APPEND_OPTS += --batch-mode
+
 %.log: %.exe %.cow
 	$(QEMU_COMMAND) -no-reboot -display none \
 	    -kernel $(<) \
-	    -append '--batch-mode' \
 	    -drive file=$(*).cow,format=qcow2 \
 	    -device i82557b,netdev=net0,mac=$(MACADDR) \
 	    -netdev user,id=net0 \
+		-append '$(APPEND_OPTS)' \
 	    -serial file:$(@).tmp
 	@mv -v $(@).tmp $(@)
 
