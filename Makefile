@@ -128,7 +128,7 @@ $(OSAL_TARGETS) \
 $(NATIVE_TARGETS): ARCH = native
 $(RTEMS_TARGETS):  ARCH = i686-rtems$(RTEMS_VERSION)
 $(RPI_TARGETS):    ARCH = arm-raspbian-linux
-$(FLIGHT_TARGETS): ARCH = ppc7400-poky-linux
+$(FLIGHT_TARGETS): ARCH = mips32r2-poky-linux
 
 # For all targets the O should be set to the per-config build dir
 $(ALL_TARGETS):    O = $(O_$(CFG))
