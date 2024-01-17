@@ -118,14 +118,17 @@ $(OSAL_TARGETS):     CFG := osal
 $(BPLIB_P_TARGETS):  CFG := bplib_p
 $(BPLIB_O_TARGETS):  CFG := bplib_o
 
+$(RTEMS_TARGETS): RTEMS_VERSION := 4.11
+export RTEMS_VERSION
+
 # Define the ARCH used for each target group
 $(BPLIB_P_TARGETS) \
 $(BPLIB_O_TARGETS) \
 $(OSAL_TARGETS) \
-$(NATIVE_TARGETS): ARCH := native
-$(RTEMS_TARGETS):  ARCH := i686-rtems4.11
-$(RPI_TARGETS):    ARCH := arm-raspbian-linux
-$(FLIGHT_TARGETS): ARCH := ppc7400-poky-linux
+$(NATIVE_TARGETS): ARCH = native
+$(RTEMS_TARGETS):  ARCH = i686-rtems$(RTEMS_VERSION)
+$(RPI_TARGETS):    ARCH = arm-raspbian-linux
+$(FLIGHT_TARGETS): ARCH = mips32r2-poky-linux
 
 # For all targets the O should be set to the per-config build dir
 $(ALL_TARGETS):    O = $(O_$(CFG))

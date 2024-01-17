@@ -3,11 +3,11 @@
 
 # Basic cross system configuration
 SET(CMAKE_SYSTEM_NAME			Linux)
-SET(CMAKE_SYSTEM_VERSION		2.6.3)
+SET(CMAKE_SYSTEM_VERSION		4.0.15)
 SET(CMAKE_SYSTEM_PROCESSOR		mips)
 SET(POKY_SYSROOT_ID             mips32r2-poky-linux)
 
-SET(TOOLCHAIN_TOP "/opt/poky/${CMAKE_SYSTEM_VERSION}" 
+SET(TOOLCHAIN_TOP "/opt/poky/${CMAKE_SYSTEM_VERSION}"
     CACHE PATH "Installation directory for toolchain, as produced from SDK")
 
 # specify the cross compiler - adjust accord to compiler installation
@@ -38,16 +38,12 @@ SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM   NEVER)
 SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY   ONLY)
 SET(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE   ONLY)
 
-# these settings are specific to cFE/OSAL and determines 
+# these settings are specific to cFE/OSAL and determines
 # which abstraction layers are built when this toolchain is used
 SET(CFE_SYSTEM_PSPNAME                  pc-linux)
-SET(OSAL_SYSTEM_BSPTYPE                 pc-linux)
-SET(OSAL_SYSTEM_OSTYPE                  posix)
 
-SET(CMAKE_C_FLAGS_INIT "${CPUTUNEFLAGS} --sysroot=${SDKTARGETSYSROOT}" 
+SET(CMAKE_C_FLAGS_INIT "${CPUTUNEFLAGS} --sysroot=${SDKTARGETSYSROOT}"
     CACHE STRING "C Flags required by platform")
 
-SET(CMAKE_CXX_FLAGS_INIT "${CPUTUNEFLAGS} --sysroot=${SDKTARGETSYSROOT}" 
+SET(CMAKE_CXX_FLAGS_INIT "${CPUTUNEFLAGS} --sysroot=${SDKTARGETSYSROOT}"
     CACHE STRING "C Flags required by platform")
-
-
