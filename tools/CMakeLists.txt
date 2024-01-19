@@ -1,42 +1,17 @@
 # CMake snippet for building the host-side tools.
-#project(CFETOOLS C)
-#
+project(CFETOOLS C)
 
+add_subdirectory(cFS-GroundSystem/Subsystems/cmdUtil)
+add_subdirectory(tblCRCTool)
 
-# build the EDS tool set which is used later in the build
-message(STATUS "Setting up EDS toolchain build...")
-add_subdirectory(eds/edslib)
-add_subdirectory(eds/tool)
-add_subdirectory(eds/cfecfs)
+if (CFE_EDS_ENABLED_BUILD)
+    # build the EDS tool set which is used later in the build
+    message(STATUS "Setting up EDS toolchain build...")
+    add_subdirectory(eds/edslib)
+    add_subdirectory(eds/tool)
+    add_subdirectory(eds/cfecfs)
+else(CFE_EDS_ENABLED_BUILD)
+    # the elf table tool is only required for a non-EDS build.
+    add_subdirectory(elf2cfetbl)
+endif(CFE_EDS_ENABLED_BUILD)
 
-add_custom_command(
-    OUTPUT
-        "${MISSION_BINARY_DIR}/edstool-complete.stamp"
-    COMMAND sedstool
-        -DBUILD_TOOL="${CMAKE_BUILD_TOOL}"
-        -DCFLAGS="${CMAKE_C_FLAGS}"
-        -DCC="${CMAKE_C_COMPILER}"
-        -DAR="${CMAKE_AR}"
-        -DOBJDIR="obj"
-        -DMISSION_BINARY_DIR="${MISSION_BINARY_DIR}"
-        -DMISSION_NAME="${MISSION_NAME}"
-        ${MISSION_EDS_FILELIST}
-        ${MISSION_EDS_SCRIPTLIST}
-    COMMAND ${CMAKE_COMMAND}
-        -E touch "edstool-complete.stamp"
-    WORKING_DIRECTORY
-        "${MISSION_BINARY_DIR}"
-    DEPENDS
-        sedstool
-        ${MISSION_EDS_FILELIST}
-        ${MISSION_EDS_SCRIPTLIST}
-)
-
-add_custom_target(edstool-execute
-    DEPENDS
-        "${MISSION_BINARY_DIR}/edstool-complete.stamp"
-)
-
-# Executing the EDS tool per above custom commands is hooked into
-# the pre-build process so it is done before any CPU builds.
-add_dependencies(mission-prebuild edstool-execute)
