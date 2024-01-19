@@ -109,12 +109,12 @@ SET(MISSION_CPUNAMES
 )
 
 SET(cpu1_PROCESSORID 1)
-SET(cpu1_APPLIST ci_lab to_lab sch_lab bplib)
+SET(cpu1_APPLIST ci_lab to_lab sch_lab)
 #LIST(APPEND cpu1_APPLIST soistest)
-LIST(APPEND cpu1_APPLIST scriptengine)
+#LIST(APPEND cpu1_APPLIST scriptengine)
 LIST(APPEND cpu1_APPLIST sample_app sample_lib)
-LIST(APPEND cpu1_APPLIST list fcgiapp)
-#LIST(APPEND cpu1_APPLIST bp)
+#LIST(APPEND cpu1_APPLIST list fcgiapp)
+#LIST(APPEND cpu1_APPLIST bplib bp)
 #LIST(APPEND cpu1_APPLIST mm)
 #LIST(APPEND cpu1_APPLIST fm) # Needs EDS dispatcher
 #LIST(APPEND cpu1_APPLIST lc)
