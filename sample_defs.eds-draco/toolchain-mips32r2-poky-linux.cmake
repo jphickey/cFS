@@ -29,7 +29,7 @@ SET(CMAKE_OBJCOPY               "${SDKHOSTBINDIR}/${TARGETPREFIX}objcopy")
 
 # where is the target environment
 SET(CMAKE_FIND_ROOT_PATH                "${SDKTARGETSYSROOT}")
-#SET(CMAKE_SYSROOT                       "${SDKTARGETSYSROOT}")
+SET(CMAKE_SYSROOT                       "${SDKTARGETSYSROOT}")
 
 # search for programs in the build host directories
 SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM   NEVER)
