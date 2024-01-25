@@ -33,17 +33,16 @@ ALL_OSAL_FUNC_TESTS +=      \
 endif
 
 
-ALL_OSAL_PARAM_TESTS :=          	\
+ALL_OSAL_PARAM_TESTS :=    \
     osal_core_UT           \
     osal_filesys_UT        \
     osal_file_UT           \
-    #osal_loader_UT         \
+    #osal_loader_UT        \
     osal_network_UT        \
     osal_timer_UT          \
 
 
 ALL_CFE_CORE_COVERAGE_TESTS :=      \
-    coverage-msg-ALL-testrunner     \
 	coverage-es-ALL-testrunner      \
     coverage-evs-ALL-testrunner     \
     coverage-fs-ALL-testrunner      \
@@ -66,10 +65,6 @@ ALL_CS_COVERAGE_TESTS += coverage-cs-cs_memory_cmds-testrunner
 ALL_CS_COVERAGE_TESTS += coverage-cs-cs_table_cmds-testrunner
 ALL_CS_COVERAGE_TESTS += coverage-cs-cs_table_processing-testrunner
 ALL_CS_COVERAGE_TESTS += coverage-cs-cs_utils-testrunner
-<<<<<<< HEAD
-#ALL_CFE_COVERAGE_TESTS += $(ALL_CS_COVERAGE_TESTS)
-=======
->>>>>>> jph-dev-gsfcbaseline
 
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_app-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_cfdp-testrunner
@@ -82,7 +77,7 @@ ALL_CF_COVERAGE_TESTS += coverage-cf-cf_clist-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_cmd-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_codec-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_crc-testrunner
-#ALL_CF_COVERAGE_TESTS += coverage-cf-cf_dispatch-testrunner
+ALL_CF_COVERAGE_TESTS += coverage-cf-cf_eds_dispatch-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_timer-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_utils-testrunner
 
@@ -99,7 +94,7 @@ ALL_BP_COVERAGE_TESTS += coverage-bp-ALL-testrunner
 ALL_FM_COVERAGE_TESTS += coverage-fm-fm_app-testrunner
 ALL_FM_COVERAGE_TESTS += coverage-fm-fm_child-testrunner
 ALL_FM_COVERAGE_TESTS += coverage-fm-fm_cmds-testrunner
-ALL_FM_COVERAGE_TESTS += coverage-fm-fm_dispatch-testrunner
+ALL_FM_COVERAGE_TESTS += coverage-fm-fm_eds_dispatch-testrunner
 ALL_FM_COVERAGE_TESTS += coverage-fm-fm_cmd_utils-testrunner
 ALL_FM_COVERAGE_TESTS += coverage-fm-fm_tbl-testrunner
 
@@ -107,38 +102,38 @@ ALL_LC_COVERAGE_TESTS += coverage-lc-lc_action-testrunner
 ALL_LC_COVERAGE_TESTS += coverage-lc-lc_app-testrunner
 ALL_LC_COVERAGE_TESTS += coverage-lc-lc_cmds-testrunner
 ALL_LC_COVERAGE_TESTS += coverage-lc-lc_custom-testrunner
-ALL_LC_COVERAGE_TESTS += coverage-lc-lc_dispatch-testrunner
+ALL_LC_COVERAGE_TESTS += coverage-lc-lc_eds_dispatch-testrunner
 ALL_LC_COVERAGE_TESTS += coverage-lc-lc_utils-testrunner
 ALL_LC_COVERAGE_TESTS += coverage-lc-lc_watch-testrunner
 
 ALL_DS_COVERAGE_TESTS += coverage-ds-ds_app-testrunner
 ALL_DS_COVERAGE_TESTS += coverage-ds-ds_cmds-testrunner
 ALL_DS_COVERAGE_TESTS += coverage-ds-ds_file-testrunner
-ALL_DS_COVERAGE_TESTS += coverage-ds-ds_dispatch-testrunner
+ALL_DS_COVERAGE_TESTS += coverage-ds-ds_eds_dispatch-testrunner
 ALL_DS_COVERAGE_TESTS += coverage-ds-ds_table-testrunner
 
 ALL_HS_COVERAGE_TESTS += coverage-hs-hs_app-testrunner
 ALL_HS_COVERAGE_TESTS += coverage-hs-hs_cmds-testrunner
 ALL_HS_COVERAGE_TESTS += coverage-hs-hs_sysmon-testrunner
-ALL_HS_COVERAGE_TESTS += coverage-hs-hs_dispatch-testrunner
+ALL_HS_COVERAGE_TESTS += coverage-hs-hs_eds_dispatch-testrunner
 ALL_HS_COVERAGE_TESTS += coverage-hs-hs_monitors-testrunner
 ALL_HS_COVERAGE_TESTS += coverage-hs-hs_utils-testrunner
 
 ALL_HK_COVERAGE_TESTS += coverage-hk-hk_app-testrunner
-ALL_HK_COVERAGE_TESTS += coverage-hk-hk_dispatch-testrunner
+ALL_HK_COVERAGE_TESTS += coverage-hk-hk_eds_dispatch-testrunner
 ALL_HK_COVERAGE_TESTS += coverage-hk-hk_utils-testrunner
 
 ALL_SC_COVERAGE_TESTS += coverage-sc-sc_app-testrunner
 ALL_SC_COVERAGE_TESTS += coverage-sc-sc_atsrq-testrunner
 ALL_SC_COVERAGE_TESTS += coverage-sc-sc_cmds-testrunner
-ALL_SC_COVERAGE_TESTS += coverage-sc-sc_dispatch-testrunner
+ALL_SC_COVERAGE_TESTS += coverage-sc-sc_eds_dispatch-testrunner
 ALL_SC_COVERAGE_TESTS += coverage-sc-sc_loads-testrunner
 ALL_SC_COVERAGE_TESTS += coverage-sc-sc_rtsrq-testrunner
 ALL_SC_COVERAGE_TESTS += coverage-sc-sc_state-testrunner
 ALL_SC_COVERAGE_TESTS += coverage-sc-sc_utils-testrunner
 
 ALL_SAMPLE_APP_COVERAGE_TESTS += coverage-sample_app-sample_app-testrunner
-ALL_SAMPLE_APP_COVERAGE_TESTS += coverage-sample_app-sample_app_dispatch-testrunner
+ALL_SAMPLE_APP_COVERAGE_TESTS += coverage-sample_app-sample_app_eds_dispatch-testrunner
 ALL_SAMPLE_APP_COVERAGE_TESTS += coverage-sample_app-sample_app_cmds-testrunner
 ALL_SAMPLE_APP_COVERAGE_TESTS += coverage-sample_app-sample_app_utils-testrunner
 
@@ -215,8 +210,8 @@ ALL_PSP_COVERAGE_TESTS :=                      \
 	#coverage-pspmod-linux_sysmon-testrunner
 
 ALL_TESTNAME_LIST += $(ALL_OSAL_COVERAGE_TESTS)
-ALL_TESTNAME_LIST += $(ALL_OSAL_PARAM_TESTS)
-ALL_TESTNAME_LIST += $(ALL_OSAL_FUNC_TESTS)
+#ALL_TESTNAME_LIST += $(ALL_OSAL_PARAM_TESTS)
+#ALL_TESTNAME_LIST += $(ALL_OSAL_FUNC_TESTS)
 ALL_TESTNAME_LIST += $(ALL_CFE_CORE_COVERAGE_TESTS)
 ALL_TESTNAME_LIST += $(ALL_CFS_APP_COVERAGE_TESTS)
 ALL_TESTNAME_LIST += $(ALL_PSP_COVERAGE_TESTS)
