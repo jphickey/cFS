@@ -171,10 +171,6 @@
      <Define name="DATA_BYTE_ORDER" value="bigEndian"/>
      <Define name="SIGNED_INTEGER_ENCODING" value="twosComplement"/>
      <Define name="SPACECRAFT_ID" value="66"/>
-     <Define name="TELECOMMAND_BASE_TOPICID" value="1"/>
-     <Define name="TELECOMMAND_MAX_TOPICID" value="61"/>
-     <Define name="TELEMETRY_BASE_TOPICID" value="61"/>
-     <Define name="TELEMETRY_MAX_TOPICID" value="121"/>
 
      <Define name="ES_CDS_MAX_NAME_LENGTH" value="16">
       <LongDescription>
