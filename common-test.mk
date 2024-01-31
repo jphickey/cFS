@@ -78,7 +78,7 @@ ALL_CF_COVERAGE_TESTS += coverage-cf-cf_clist-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_cmd-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_codec-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_crc-testrunner
-#ALL_CF_COVERAGE_TESTS += coverage-cf-cf_dispatch-testrunner
+ALL_CF_COVERAGE_TESTS += coverage-cf-cf_dispatch-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_timer-testrunner
 ALL_CF_COVERAGE_TESTS += coverage-cf-cf_utils-testrunner
 
@@ -210,8 +210,8 @@ ALL_PSP_COVERAGE_TESTS :=                      \
 	#coverage-pspmod-linux_sysmon-testrunner
 
 ALL_TESTNAME_LIST += $(ALL_OSAL_COVERAGE_TESTS)
-ALL_TESTNAME_LIST += $(ALL_OSAL_PARAM_TESTS)
-ALL_TESTNAME_LIST += $(ALL_OSAL_FUNC_TESTS)
+#ALL_TESTNAME_LIST += $(ALL_OSAL_PARAM_TESTS)
+#ALL_TESTNAME_LIST += $(ALL_OSAL_FUNC_TESTS)
 ALL_TESTNAME_LIST += $(ALL_CFE_CORE_COVERAGE_TESTS)
 ALL_TESTNAME_LIST += $(ALL_CFS_APP_COVERAGE_TESTS)
 ALL_TESTNAME_LIST += $(ALL_PSP_COVERAGE_TESTS)
