@@ -143,7 +143,7 @@ $(ALL_TARGETS): ENV_OPTS += PKG_CONFIG_PATH=$(HOME)/code/local/lib/pkgconfig
 # Define extra prep options for each target group
 # Note that because prep can also be triggered indirectly, the PREP_OPTS
 # is set for all targets, not just the prep target itself
-$(ALL_TARGETS):    PREP_OPTS += -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE
+$(ALL_TARGETS):    PREP_OPTS += -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE -DCFE_EDS_ENABLED_BUILD=ON
 $(RTEMS_TARGETS) \
 $(RPI_TARGETS) \
 $(NATIVE_TARGETS) \
