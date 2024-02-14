@@ -5,51 +5,45 @@ INSTALL_DIR ?= $(O)/exe
 COMPILED_MODULE_LIST := $(shell awk  '/@.*_VERSION@/ { app = gensub (/@(\w+)_VERSION@/, "\\1", 1, $$3); print toupper(app); }' $(O)/cfe_module_version.in)
 TESTABLE_MODULE_LIST := SAMPLE_APP FM CF LC SC HK DS HS MM CS BP BPLIB
 MODULE_LIST := $(filter $(COMPILED_MODULE_LIST),$(TESTABLE_MODULE_LIST))
-#$(error MODULE_LIST=$(MODULE_LIST))
 
-ALL_OSAL_FUNC_TESTS :=          	\
-    bin-sem-flush-test		\
-    bin-sem-test			\
-    bin-sem-timeout-test	\
-    count-sem-test			\
-    file-api-test			\
-    file-sys-add-fixed-map-api-test	\
-    idmap-api-test			\
-    mutex-test				\
-    osal-core-test			\
-    queue-test		        \
-    sem-speed-test			\
-    symbol-api-test			\
-    time-base-api-test		\
-    timer-add-api-test		\
-    timer-test
+ALL_OSAL_FUNC_TESTS += bin-sem-test
+ALL_OSAL_FUNC_TESTS += bin-sem-timeout-test
+ALL_OSAL_FUNC_TESTS += count-sem-test
+ALL_OSAL_FUNC_TESTS += file-api-test
+ALL_OSAL_FUNC_TESTS += file-sys-add-fixed-map-api-test
+ALL_OSAL_FUNC_TESTS += idmap-api-test
+ALL_OSAL_FUNC_TESTS += mutex-test
+ALL_OSAL_FUNC_TESTS += osal-core-test
+ALL_OSAL_FUNC_TESTS += queue-test
+ALL_OSAL_FUNC_TESTS += sem-speed-test
+ALL_OSAL_FUNC_TESTS += symbol-api-test
+ALL_OSAL_FUNC_TESTS += time-base-api-test
+ALL_OSAL_FUNC_TESTS += timer-add-api-test
+ALL_OSAL_FUNC_TESTS += timer-test
 
 # These functional tests require a network stack,
 # so they can be skipped on platforms that may not have network
 ifeq ($(SKIP_NET_TESTS),)
-ALL_OSAL_FUNC_TESTS +=      \
-    network-api-test		\
-    select-test
+ALL_OSAL_FUNC_TESTS += network-api-test
+ALL_OSAL_FUNC_TESTS += select-test
 endif
 
 
-ALL_OSAL_PARAM_TESTS :=          	\
-    osal_core_UT           \
-    osal_filesys_UT        \
-    osal_file_UT           \
-    #osal_loader_UT         \
-    osal_network_UT        \
-    osal_timer_UT          \
+ALL_OSAL_PARAM_TESTS += osal_core_UT
+ALL_OSAL_PARAM_TESTS += osal_filesys_UT
+ALL_OSAL_PARAM_TESTS += osal_file_UT
+ALL_OSAL_PARAM_TESTS += osal_loader_UT
+ALL_OSAL_PARAM_TESTS += osal_network_UT
+ALL_OSAL_PARAM_TESTS += osal_timer_UT
 
 
-ALL_CFE_CORE_COVERAGE_TESTS :=      \
-    coverage-msg-ALL-testrunner     \
-	coverage-es-ALL-testrunner      \
-    coverage-evs-ALL-testrunner     \
-    coverage-fs-ALL-testrunner      \
-    coverage-sb-ALL-testrunner      \
-    coverage-tbl-ALL-testrunner     \
-    coverage-time-ALL-testrunner
+ALL_CFE_CORE_COVERAGE_TESTS += coverage-msg-ALL-testrunner
+ALL_CFE_CORE_COVERAGE_TESTS += coverage-es-ALL-testrunner
+ALL_CFE_CORE_COVERAGE_TESTS += coverage-evs-ALL-testrunner
+ALL_CFE_CORE_COVERAGE_TESTS += coverage-fs-ALL-testrunner
+ALL_CFE_CORE_COVERAGE_TESTS += coverage-sb-ALL-testrunner
+ALL_CFE_CORE_COVERAGE_TESTS += coverage-tbl-ALL-testrunner
+ALL_CFE_CORE_COVERAGE_TESTS += coverage-time-ALL-testrunner
 
 ALL_CFE_CORE_COVERAGE_TESTS += resourceid_UT
 ALL_CFE_CORE_COVERAGE_TESTS += sbr_map_direct_UT
@@ -149,7 +143,6 @@ ALL_CFS_APP_COVERAGE_TESTS := $(foreach MOD,$(MODULE_LIST),$(ALL_$(MOD)_COVERAGE
 #ALL_CFS_APP_COVERAGE_TESTS += $(ALL_HS_COVERAGE_TESTS)
 #ALL_CFS_APP_COVERAGE_TESTS += $(ALL_HK_COVERAGE_TESTS)
 #ALL_CFS_APP_COVERAGE_TESTS += $(ALL_SC_COVERAGE_TESTS)
-#$(error ALL_CFS_APP_COVERAGE_TESTS=$(ALL_CFS_APP_COVERAGE_TESTS))
 
 ALL_OSAL_COVERAGE_TESTS :=                      \
 	coverage-shared-binsem-testrunner			\
