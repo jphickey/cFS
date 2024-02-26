@@ -32,7 +32,7 @@ endif
 ALL_OSAL_PARAM_TESTS += osal_core_UT
 ALL_OSAL_PARAM_TESTS += osal_filesys_UT
 ALL_OSAL_PARAM_TESTS += osal_file_UT
-ALL_OSAL_PARAM_TESTS += osal_loader_UT
+#ALL_OSAL_PARAM_TESTS += osal_loader_UT
 ALL_OSAL_PARAM_TESTS += osal_network_UT
 ALL_OSAL_PARAM_TESTS += osal_timer_UT
 

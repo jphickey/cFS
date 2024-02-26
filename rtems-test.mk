@@ -14,6 +14,7 @@ QEMU_COMMAND ?= qemu-system-i386 -m 128
 MACADDR = 00:04:9F$(shell head -c 3 /dev/urandom | hexdump -v -e '/1 ":%02X"')
 
 PARTED_CMD = /usr/sbin/parted
+MKFS_CMD = /usr/sbin/mkfs.fat
 
 .PHONY: run cfe-disk
 .SECONDARY: $(addsuffix .log,$(ALL_TEST_LIST)))
@@ -30,7 +31,7 @@ $(CFE_DISK_IMG):
 
 $(CFE_FS_IMG): $(O)/stamp.install
 	truncate -s $$((($(CFE_IMG_MB) * 1048576) - 32256))  $(@)
-	mkfs.fat $(@)
+	$(MKFS_CMD) $(@)
 	mcopy -i $(@) -sv $(O)/i686-rtems4.11/default_cpu1/osal/unit-tests/osloader-test/utmod :: || /bin/true
 	mcopy -i $(@) -sv $(INSTALL_DIR)/$(CPUNAME)/eeprom ::
 
