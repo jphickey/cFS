@@ -12,24 +12,24 @@
   branch = main
 [submodule "apps/ci_lab"]
 	path = apps/ci_lab
-	url = https://github.com/jphickey/ci_lab.git
-	branch = techdev-sois-eds
+	url = https://github.com/nasa/ci_lab.git
+  branch = main
 [submodule "apps/sample_app"]
 	path = apps/sample_app
-	url = https://github.com/jphickey/sample_app.git
-	branch = techdev-sois-eds
+	url = https://github.com/nasa/sample_app.git
+	branch = main
 [submodule "apps/sample_lib"]
 	path = libs/sample_lib
 	url = https://github.com/nasa/sample_lib.git
   branch = main
 [submodule "apps/sch_lab"]
 	path = apps/sch_lab
-	url = https://github.com/jphickey/sch_lab.git
-	branch = techdev-sois-eds
+	url = https://github.com/nasa/sch_lab.git
+  branch = main
 [submodule "apps/to_lab"]
 	path = apps/to_lab
-	url = https://github.com/jphickey/to_lab.git
-	branch = techdev-sois-eds
+	url = https://github.com/nasa/to_lab.git
+  branch = main
 [submodule "tools/cFS-GroundSystem"]
 	path = tools/cFS-GroundSystem
 	url = https://github.com/nasa/cFS-GroundSystem.git
@@ -44,6 +44,5 @@
   branch = main
 [submodule "tools/eds"]
 	path = tools/eds
-	url = https://github.com/jphickey/EdsLib.git
+	url = https://github.com/nasa/EdsLib.git
 	branch = main
-
