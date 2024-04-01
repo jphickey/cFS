@@ -31,4 +31,9 @@ add_compile_options(
   -Wwrite-strings             # Warn if not treating string literals as "const"
   -Wpointer-arith             # Warn about suspicious pointer operations
   -Wsizeof-pointer-memaccess  # Suspicious
+  -fsanitize=address
+)
+
+add_link_options(
+-fsanitize=address
 )
