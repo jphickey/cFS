@@ -32,3 +32,9 @@ add_compile_options(
   -Wpointer-arith             # Warn about suspicious pointer operations
   -Wsizeof-pointer-memaccess  # Suspicious
 )
+
+set(ENABLE_ASAN $ENV{ENABLE_ASAN} CACHE BOOL "Enable address sanitizer")
+if (ENABLE_ASAN)
+  add_compile_options(-fsanitize=address)
+  add_link_options(-fsanitize=address)
+endif(ENABLE_ASAN)

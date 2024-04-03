@@ -62,6 +62,7 @@ INSTALLPREFIX ?= /exe
 DESTDIR       ?= $(abspath $(O))
 ENABLE_TESTS  ?= true
 BUILDTYPE     ?= debug
+ENABLE_ASAN   ?=
 
 # If using containers it is possible that the "native" gcc version
 # might refer to a different version, if this is run in a container vs.
@@ -109,6 +110,11 @@ BPLIB_O_TARGETS   := $(addprefix bplib_o.,$(ALLTGT_NAMES))
 DISTCLEAN_TARGETS := $(addsuffix .distclean,$(CONFIG_NAMES))
 DOCS_TARGETS      := $(addsuffix .docs,$(CONFIG_NAMES))
 
+CFE_TARGETS += $(NATIVE_TARGETS)
+CFE_TARGETS += $(RTEMS_TARGETS)
+CFE_TARGETS += $(RPI_TARGETS)
+CFE_TARGETS += $(FLIGHT_TARGETS)
+
 # Define the config (CFG) and build dir (O) for each target group
 $(NATIVE_TARGETS):   CFG := native
 $(RTEMS_TARGETS):    CFG := rtems
@@ -133,28 +139,17 @@ $(FLIGHT_TARGETS): ARCH = mips32r2-poky-linux
 # For all targets the O should be set to the per-config build dir
 $(ALL_TARGETS):    O = $(O_$(CFG))
 
-$(RTEMS_TARGETS) \
-$(RPI_TARGETS) \
-$(NATIVE_TARGETS) \
-$(FLIGHT_TARGETS): SUBTGT_PREFIX := mission-
+$(CFE_TARGETS): SUBTGT_PREFIX := mission-
 
 # Define extra prep options for each target group
 # Note that because prep can also be triggered indirectly, the PREP_OPTS
 # is set for all targets, not just the prep target itself
-$(ALL_TARGETS):    PREP_OPTS += -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE
-$(RTEMS_TARGETS) \
-$(RPI_TARGETS) \
-$(NATIVE_TARGETS) \
-$(FLIGHT_TARGETS): PREP_OPTS += -DCMAKE_INSTALL_PREFIX=$(INSTALLPREFIX) -DSIMULATION=$(ARCH)
-$(RTEMS_TARGETS) \
-$(RPI_TARGETS) \
-$(NATIVE_TARGETS) \
-$(FLIGHT_TARGETS): PREP_OPTS += -DENABLE_UNIT_TESTS=$(ENABLE_TESTS)
-$(RTEMS_TARGETS) \
-$(RPI_TARGETS) \
-$(OSAL_TARGETS) \
+$(ALL_TARGETS): PREP_OPTS += -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE
+$(CFE_TARGETS): PREP_OPTS += -DCMAKE_INSTALL_PREFIX=$(INSTALLPREFIX) -DSIMULATION=$(ARCH)
+$(CFE_TARGETS): PREP_OPTS += -DENABLE_UNIT_TESTS=$(ENABLE_TESTS)
 $(BPLIB_O_TARGETS) \
-$(NATIVE_TARGETS): PREP_OPTS += -DCMAKE_BUILD_TYPE=$(BUILDTYPE)
+$(OSAL_TARGETS) \
+$(CFE_TARGETS): PREP_OPTS += -DCMAKE_BUILD_TYPE=$(BUILDTYPE)
 $(RPI_TARGETS) \
 $(FLIGHT_TARGETS): ENV_OPTS += OMIT_DEPRECATED=true
 $(BPLIB_P_TARGETS) \
@@ -180,6 +175,11 @@ $(BPLIB_O_TARGETS):  PREP_OPTS += -DCMAKE_INSTALL_PREFIX=$(HOME)/code/local
 $(BPLIB_O_TARGETS):  PREP_OPTS += -DBPLIB_OS_LAYER=OSAL
 $(BPLIB_P_TARGETS):  PREP_OPTS += -DBPLIB_OS_LAYER=POSIX
 $(BPLIB_P_TARGETS) $(BPLIB_O_TARGETS):  PREP_OPTS += "$(CURDIR)/libs/bplib"
+
+ifneq ($(ENABLE_ASAN),)
+$(CFE_TARGETS): ENV_OPTS += ENABLE_ASAN=$(ENABLE_ASAN)
+export ENABLE_ASAN
+endif
 
 # The following set of variables is exported to the sub-makes
 export O
