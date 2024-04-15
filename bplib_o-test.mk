@@ -18,7 +18,7 @@ ALL_LOGFILE_LIST := $(addsuffix .log,$(ALL_TEST_LIST))
 all_logs: | clean_lcov
 
 $(O)/coverage_test.info: force
-	lcov --capture --rc lcov_branch_coverage=1 --directory "$(O)" --output-file "$(O)/coverage_test.info"
+	lcov --capture --rc lcov_branch_coverage=1 --exclude '/usr/*' --directory "$(O)" --output-file "$(O)/coverage_test.info"
 
 clean_lcov:
 	find "$(O)" -type f -name '*.gcno' -o -name '*.gcda' -print0 | xargs -0 rm -f

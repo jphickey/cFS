@@ -16,28 +16,20 @@
  * limitations under the License.
  ************************************************************************/
 
-/**
- * @file
- *
- * Purpose:
- *   This header file contains the mission configuration parameters and
- *   typedefs with mission scope.
- *
- * Notes:
- *   The impact of changing these configurations from their default value is
- *   not yet documented.  Changing these values may impact the performance
- *   and functionality of the system.
- *
- * Author:   R.McGraw/SSI
- *
- */
-
-#ifndef SAMPLE_MISSION_CFG_H
-#define SAMPLE_MISSION_CFG_H
+#include "cfe_tbl_filedef.h" /* Required to obtain the CFE_TBL_FILEDEF macro definition */
+#include "sample_app_tbl.h"
 
 /*
- * Pull in defintions from EDS
- */
-#include "samplemission_eds_designparameters.h"
+** The following is an example of the declaration statement that defines the desired
+** contents of the table image.
+*/
+SAMPLE_APP_ExampleTable_t ExampleTable = {1, 2};
 
-#endif /* SAMPLE_MISSION_CFG_H */
+/*
+** The macro below identifies:
+**    1) the data structure type to use as the table image format
+**    2) the name of the table to be placed into the cFE Table File Header
+**    3) a brief description of the contents of the file image
+**    4) the desired name of the table image binary file that is cFE compatible
+*/
+CFE_TBL_FILEDEF(ExampleTable, SAMPLE_APP.ExampleTable, Table Utility Test Table, alt1_sample_app.tbl)

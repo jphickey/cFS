@@ -7,7 +7,7 @@
 # Definitions and options specified here will be used when cross-compiling
 # _all_ FSW code for _all_ targets defined in targets.cmake.
 #
-# Avoid machine-specific code generation options in this file (e.g. -f,-m options); such 
+# Avoid machine-specific code generation options in this file (e.g. -f,-m options); such
 # options should be localized to the toolchain file such that they will only be
 # included on the machines where they apply.
 #
@@ -26,21 +26,18 @@
 # and uses the same warning options that are applied at the mission level.
 #
 add_compile_options(
-    -std=c99                # Target the C99 standard (without gcc extensions)
-    -pedantic               # Issue all the warnings demanded by strict ISO C
+    -std=c99                    # Target the C99 standard (without gcc extensions)
+    -pedantic                   # Issue all the warnings demanded by strict ISO C
+    -Wall                       # Warn about most questionable operations
+    -Werror                     # Treat warnings as errors (code should be clean)
     -fstrict-aliasing
-    -Wall                   # Warn about most questionable operations
-    -Wstrict-prototypes     # Warn about missing prototypes
-    -Wstrict-aliasing       # Warn about strict aliasing violations
-    -Wwrite-strings         # Warn if not treating string literals as "const"
-    -Wpointer-arith         # Warn about suspicious pointer operations
-    -Wcast-align            # Warn about casts that increase alignment requirements
-    -Werror                 # Treat warnings as errors (code should be clean)
-    -Wno-conversion            # Lots of false positives
-    -Wno-stringop-truncation   # Lots of false positives
-    -Wno-format-truncation     # Lots of false positives
-    -Wno-restrict              # False positives, possible compiler bug?
 )
 
-add_definitions(-D_LARGEFILE_SOURCE)
-
+if (CMAKE_C_COMPILER_VERSION VERSION_GREATER_EQUAL  8.0.0)
+add_compile_options(
+    -Wno-stringop-overflow
+    -Wno-stringop-truncation
+    -Wno-format-overflow
+    -Wno-format-truncation
+)
+endif()

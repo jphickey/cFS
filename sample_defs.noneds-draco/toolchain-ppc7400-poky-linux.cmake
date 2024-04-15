@@ -3,7 +3,7 @@
 
 # Basic cross system configuration
 SET(CMAKE_SYSTEM_NAME			Linux)
-SET(CMAKE_SYSTEM_VERSION		3.1.13)
+SET(CMAKE_SYSTEM_VERSION		4.0.4)
 SET(CMAKE_SYSTEM_PROCESSOR		powerpc)
 
 set(CPUTUNEFLAGS                "-mbig-endian -m32 -mhard-float -mcpu=7400 -mno-spe")

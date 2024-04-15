@@ -19,7 +19,7 @@
 
 #include "cfe.h"
 #include "cfe_tbl_filedef.h"
-#include "cf_tbldefs.h"
+#include "cf_tbl.h"
 
 CF_ConfigTable_t CF_config_table = {
     10,    /* ticks_per_second */
@@ -37,7 +37,7 @@ CF_ConfigTable_t CF_config_table = {
          0x081a,
          16,
          {{5, 25, CF_CFDP_CLASS_2, 23, "/cf/poll_dir", "./poll_dir", 0}, {0}, {0}, {0}, {0}},
-         "CF_tsem",
+         "BP0_tsem",
          1,
      },
      {5, /* max number of outgoing messages per wakeup */
@@ -51,7 +51,7 @@ CF_ConfigTable_t CF_config_table = {
       0x090a,
       16,
       {{0}, {0}, {0}, {0}, {0}},
-      "", /* throttle sem for channel 2, empty string means no throttle */
+      "BP1_tsem", /* throttle sem for channel 2, empty string means no throttle */
       1}},
     480, /* outgoing_file_chunk_size */
     "/cf/tmp",

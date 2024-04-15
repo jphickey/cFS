@@ -6,11 +6,11 @@ set(CMAKE_SYSTEM_NAME       Linux)
 set(CMAKE_SYSTEM_PROCESSOR  arm)
 set(CMAKE_SYSTEM_VERSION    1)
 
-set(RASPIAN_BASE_DIR "/disk/workarea/joe/wa/rpi/raspbian")
+set(XTOOL_BASE_DIR "$ENV{HOME}/x-tools")
 
 # specify the cross compiler - adjust accord to compiler installation
 # This uses the compiler-wrapper toolchain that buildroot produces
-SET(TOOLCHAIN_TOP "${RASPIAN_BASE_DIR}/tools"
+SET(TOOLCHAIN_TOP "${XTOOL_BASE_DIR}/raspbian"
     CACHE PATH "Location of the clone of https://github.com/raspberrypi/tools.git")
     
 SET(TOOLCHAIN_VARIANT "arm-rpi-4.9.3-linux-gnueabihf"

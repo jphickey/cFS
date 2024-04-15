@@ -1,11 +1,20 @@
 
 message("inside install_custom cpu1")
-target_include_directories(cpu1_sch_lab_table_sch_lab_table PRIVATE
+target_include_directories(sch_lab.table INTERFACE
     $<TARGET_PROPERTY:cf,INCLUDE_DIRECTORIES>
-    $<TARGET_PROPERTY:bp,INCLUDE_DIRECTORIES>
-)
-target_include_directories(cpu1_bp_bp_flowtable PRIVATE
-    $<TARGET_PROPERTY:cf,INCLUDE_DIRECTORIES>
+    $<TARGET_PROPERTY:sc,INCLUDE_DIRECTORIES>
 )
 
-#add_cfe_tables(sample_app alt_sample_tbl.c alt2_sample_tbl.c)
+if (TARGET bp)
+target_include_directories(sch_lab.table INTERFACE
+    $<TARGET_PROPERTY:bp,INCLUDE_DIRECTORIES>
+)
+target_include_directories(bp.table INTERFACE
+    $<TARGET_PROPERTY:cf,INCLUDE_DIRECTORIES>
+)
+endif()
+
+target_compile_definitions(sc PUBLIC SC_OMIT_DEPRECATED)
+
+
+add_cfe_tables(sample_app alt_sample_tbl.c alt2_sample_tbl2.c)

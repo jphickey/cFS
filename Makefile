@@ -74,16 +74,17 @@ O_native ?= build-native-$(NATIVE_GCC_VER)
 O_rtems  ?= build-rtems
 O_rpi    ?= build-rpi
 O_flight ?= build-flight
+O_osal   ?= build-osal
 O_bplib_p  ?= build-bplib_p
 O_bplib_o  ?= build-bplib_o
 
 # The "stamp" target names are associated with a file in the build dir to indicate last run time
 # The "nostamp" target names do not have this, and are always executed
-STAMPTGT_NAMES    := prep compile install test lcov detaildesign usersguide osalguide clean
+STAMPTGT_NAMES    := prep compile install test lcov detaildesign usersguide osalguide clean cleantest
 NOSTAMPTGT_NAMES  := distclean docs
 
 # The config names is a list of configurations to build
-CONFIG_NAMES      := native rtems rpi flight bplib_p bplib_o
+CONFIG_NAMES      := native rtems rpi flight osal bplib_p bplib_o
 
 # The actual buildable targets are a combination of CONFIG.NAME (e.g. native.install)
 STAMP_TARGETS     := $(foreach CFG,$(CONFIG_NAMES),$(addprefix $(CFG).,$(STAMPTGT_NAMES)))
@@ -101,6 +102,7 @@ NATIVE_TARGETS    := $(addprefix native.,$(ALLTGT_NAMES))
 RTEMS_TARGETS     := $(addprefix rtems.,$(ALLTGT_NAMES))
 RPI_TARGETS       := $(addprefix rpi.,$(ALLTGT_NAMES))
 FLIGHT_TARGETS    := $(addprefix flight.,$(ALLTGT_NAMES))
+OSAL_TARGETS      := $(addprefix osal.,$(ALLTGT_NAMES))
 BPLIB_P_TARGETS   := $(addprefix bplib_p.,$(ALLTGT_NAMES))
 BPLIB_O_TARGETS   := $(addprefix bplib_o.,$(ALLTGT_NAMES))
 
@@ -112,15 +114,21 @@ $(NATIVE_TARGETS):   CFG := native
 $(RTEMS_TARGETS):    CFG := rtems
 $(RPI_TARGETS):      CFG := rpi
 $(FLIGHT_TARGETS):   CFG := flight
+$(OSAL_TARGETS):     CFG := osal
 $(BPLIB_P_TARGETS):  CFG := bplib_p
 $(BPLIB_O_TARGETS):  CFG := bplib_o
 
+$(RTEMS_TARGETS): RTEMS_VERSION := 4.11
+export RTEMS_VERSION
+
 # Define the ARCH used for each target group
-$(BPLIB_P_TARGETS) $(BPLIB_O_TARGETS) \
-$(NATIVE_TARGETS): ARCH := native
-$(RTEMS_TARGETS):  ARCH := i686-rtems4.11
-$(RPI_TARGETS):    ARCH := arm-raspbian-linux
-$(FLIGHT_TARGETS): ARCH := ppc7400-poky-linux
+$(BPLIB_P_TARGETS) \
+$(BPLIB_O_TARGETS) \
+$(OSAL_TARGETS) \
+$(NATIVE_TARGETS): ARCH = native
+$(RTEMS_TARGETS):  ARCH = i686-rtems$(RTEMS_VERSION)
+$(RPI_TARGETS):    ARCH = arm-raspbian-linux
+$(FLIGHT_TARGETS): ARCH = mips32r2-poky-linux
 
 # For all targets the O should be set to the per-config build dir
 $(ALL_TARGETS):    O = $(O_$(CFG))
@@ -135,7 +143,7 @@ $(ALL_TARGETS): ENV_OPTS += PKG_CONFIG_PATH=$(HOME)/code/local/lib/pkgconfig
 # Define extra prep options for each target group
 # Note that because prep can also be triggered indirectly, the PREP_OPTS
 # is set for all targets, not just the prep target itself
-$(ALL_TARGETS):    PREP_OPTS += -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE
+$(ALL_TARGETS):    PREP_OPTS += -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE -DCFE_EDS_ENABLED_BUILD=ON
 $(RTEMS_TARGETS) \
 $(RPI_TARGETS) \
 $(NATIVE_TARGETS) \
@@ -160,6 +168,16 @@ $(RPI_TARGETS) \
 $(NATIVE_TARGETS) \
 $(FLIGHT_TARGETS): PREP_OPTS += "$(CURDIR)/cfe"
 
+$(OSAL_TARGETS): PREP_OPTS += -DCMAKE_INSTALL_PREFIX=$(HOME)/code/local
+$(OSAL_TARGETS): DESTDIR :=
+$(OSAL_TARGETS): PREP_OPTS += -DENABLE_UNIT_TESTS=TRUE
+$(OSAL_TARGETS): PREP_OPTS += -DOSAL_OMIT_DEPRECATED=TRUE
+$(OSAL_TARGETS): PREP_OPTS += -DOSAL_SYSTEM_BSPTYPE=generic-linux
+$(OSAL_TARGETS): PREP_OPTS += -DOSAL_CONFIG_DEBUG_PERMISSIVE_MODE=on
+$(OSAL_TARGETS): PREP_OPTS += -DOSAL_VALIDATE_API=on
+$(OSAL_TARGETS): PREP_OPTS += -DOSAL_USER_C_FLAGS='-Wall -Werror'
+$(OSAL_TARGETS): PREP_OPTS += "$(CURDIR)/osal"
+
 $(BPLIB_O_TARGETS):  PREP_OPTS += -DCMAKE_PREFIX_PATH=$(HOME)/code/local/lib/cmake
 $(BPLIB_O_TARGETS):  PREP_OPTS += -DCMAKE_INSTALL_PREFIX=$(HOME)/code/local
 $(BPLIB_O_TARGETS):  PREP_OPTS += -DBPLIB_OS_LAYER=OSAL
@@ -170,8 +188,6 @@ $(BPLIB_P_TARGETS) $(BPLIB_O_TARGETS):  PREP_OPTS += "$(CURDIR)/libs/bplib"
 export O
 export ARCH
 export CFG
-export PREP_OPTS
-export DESTDIR
 
 # Export VERBOSE only if it was actually set to something
 ifneq ($(VERBOSE),)
@@ -236,13 +252,18 @@ native.distclean: | rm-buildlink
 
 # A generic pattern rule to invoke a sub-make for the appliction build/install to staging area
 %/stamp.install: %/stamp.prep
-	env $(ENV_OPTS) $(MAKE) --no-print-directory -C "$(O)" $(SUBTGT_PREFIX)install
+	env $(ENV_OPTS) $(MAKE) --no-print-directory -C "$(O)" DESTDIR="$(DESTDIR)" $(SUBTGT_PREFIX)install
 	touch "$(@)"
 
 # A generic pattern rule to clean a build area
 %/stamp.clean: %/stamp.prep %/stamp.compile.rm-stamp %/stamp.install.rm-stamp %/stamp.test.rm-stamp %/stamp.lcov.rm-stamp
 	env $(ENV_OPTS) $(MAKE) --no-print-directory -C "$(O)" $(SUBTGT_PREFIX)clean
 	touch "$(@)"
+
+# A generic pattern rule to invoke a sub-make for staging binaries
+%/stamp.cleantest: %/stamp.install
+	$(MAKE) --no-print-directory -f $(CFG)-test.mk clean_lcov clean_logs
+	$(MAKE) $(CFG).test
 
 # A generic pattern rule to invoke a sub-make for running tests
 %/stamp.test: %/stamp.install
