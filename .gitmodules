@@ -62,8 +62,7 @@
 	path = libs/scriptengine
 	url = https://github.com/jphickey/scriptengine.git
 	branch = main
+
 [submodule "apps/fcgiapp"]
 	path = apps/fcgiapp
 	url = joe@phlobus.net:gitrepo/fcgiapp
-	branch = main
-
