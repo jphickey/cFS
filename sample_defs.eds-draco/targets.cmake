@@ -98,6 +98,10 @@ list(APPEND MISSION_GLOBAL_APPLIST sample_app sample_lib)
 # be copied during the install process.
 SET(FT_INSTALL_SUBDIR "host/functional-test")
 
+# UI_INSTALL_SUBDIR indicates where the UI data files (included in some apps) should
+# be copied during the install process.
+SET(UI_INSTALL_SUBDIR "ui")
+
 # Each target board can have its own HW arch selection and set of included apps
 SET(MISSION_CPUNAMES
     cpu1
