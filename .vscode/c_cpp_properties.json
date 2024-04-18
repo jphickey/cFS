@@ -27,7 +27,7 @@
             ],
             "cStandard": "c99",
             "cppStandard": "c++03",
-            "compileCommands": "${workspaceFolder}/build/native/default_cpu1/compile_commands.json",
+            "compileCommands": "${workspaceFolder}/build-native-12.2.0/native/default_cpu1/compile_commands.json",
             "compilerPath": "/usr/bin/gcc"
         },
         {

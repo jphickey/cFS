@@ -8,7 +8,10 @@
             "problemMatcher": [
                 "$gcc"
             ],
-            "group": "build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "detail": "Build CFE core and related modules for native architecture"
         },
         {
@@ -69,10 +72,7 @@
                 "$gcc"
             ],
             "detail": "Run EDS tool to regenerate headers and objects",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            "group": "build"
         }
     ]
 }
