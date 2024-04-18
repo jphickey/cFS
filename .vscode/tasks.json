@@ -1,0 +1,78 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "native build",
+            "type": "shell",
+            "command": "make -j1 native.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Build CFE core and related modules for native architecture"
+        },
+        {
+            "label": "OSAL standalone build",
+            "type": "shell",
+            "command": "make -j1 osal.compile VERBOSE=1",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Build OSAL and related modules for native architecture"
+        },
+        {
+            "label": "BPLib standalone build",
+            "type": "shell",
+            "command": "make VERBOSE=1 bplib_o.compile bplib_p.compile",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Build BPLib library as standalone"
+        },
+        {
+            "label": "RTEMS build",
+            "type": "shell",
+            "command": "make -j1 rtems.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build CFE core and related modules for RTEMS",
+            "group": "build"
+        },
+        {
+            "label": "Flight build",
+            "type": "shell",
+            "command": "make -j3 flight.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build CFE core and related modules for flight (+optimization enabled)",
+            "group": "build"
+        },
+        {
+            "label": "RPi build",
+            "type": "shell",
+            "command": "make -j1 rpi.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build CFE core and related modules for RPi",
+            "group": "build"
+        },
+        {
+            "label": "Regenerate EDS artifacts",
+            "type": "shell",
+            "command": "rm -f build-native-12.2.0/edstool-complete.stamp && make -C build-native-12.2.0 edstool-execute",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Run EDS tool to regenerate headers and objects",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

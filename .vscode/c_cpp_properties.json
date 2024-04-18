@@ -1,0 +1,70 @@
+{
+    "configurations": [
+        {
+            "name": "SOIS development",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include/lua5.3"
+            ],
+            "defines": [
+                "_XOPEN_SOURCE=600",
+                "CFE_EDS_ENABLED_BUILD=1"
+            ],
+            "cStandard": "c99",
+            "cppStandard": "c++03",
+            "compileCommands": "${workspaceFolder}/build-native-12.2.0/native/default_cpu1/compile_commands.json",
+            "compilerPath": "/usr/bin/gcc"
+        },
+        {
+            "name": "Linux EDS",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include/lua5.3"
+            ],
+            "defines": [
+                "_XOPEN_SOURCE=600",
+                "CFE_EDS_ENABLED_BUILD=1"
+            ],
+            "cStandard": "c99",
+            "cppStandard": "c++03",
+            "compileCommands": "${workspaceFolder}/build/native/default_cpu1/compile_commands.json",
+            "compilerPath": "/usr/bin/gcc"
+        },
+        {
+            "name": "Linux Non-EDS",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/cfe/modules/msg/fsw/inc",
+                "${workspaceFolder}/libs/bplib/common/inc",
+                "/usr/local/include/tinycbor"
+            ],
+            "defines": [
+                "_XOPEN_SOURCE=600"
+            ],
+            "cStandard": "c99",
+            "cppStandard": "c++03",
+            "compileCommands": "${workspaceFolder}/build-native-12.2.0/native/default_cpu1/compile_commands.json",
+            "compilerPath": "/usr/bin/gcc",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        },
+        {
+            "name": "BPLib+OSAL",
+            "includePath": [
+                "${workspaceFolder}/osal/src/os/inc",
+                "${workspaceFolder}/osal/ut_assert/inc",
+                "${workspaceFolder}/libs/bplib/inc",
+                "${workspaceFolder}/libs/bplib/**/inc",
+                "/usr/local/include/tinycbor"
+            ],
+            "defines": [
+                "_XOPEN_SOURCE=600"
+            ],
+            "cStandard": "c99",
+            "cppStandard": "c++03",
+            "compileCommands": "${workspaceFolder}/build-bplib_o/compile_commands.json",
+            "compilerPath": "/usr/bin/gcc",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
+    ],
+    "version": 4
+}

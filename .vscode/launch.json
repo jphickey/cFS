@@ -1,0 +1,224 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Launch CFE Core 1",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/exe/cpu1/core-cpu1",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/exe/cpu1",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Launch CFE Core 2",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/exe/cpu2/core-cpu2",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/exe/cpu2",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+         {
+            "name": "(gdb) Launch BPLib Unit Test, standalone build",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build-bplib_o/lib/ut-coverage/coverage-bplib_base-testrunner",
+            "args": ["-v"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build-bplib_o/lib/ut-coverage",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Launch BPLib Unit Test, cFE build",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/exe/cpu1/coverage-bplib_cache-testrunner",
+            "args": ["-v"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/exe/cpu1",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Launch BPLib Functional Test, standalone build",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build-bplib_o/ut-functional/functional-bplib_sanity-testrunner",
+            "args": ["-v"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build-bplib_o/ut-functional",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Launch CFE Unit Test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build-native-12.2.0/exe/cpu1/coverage-tbl-ALL-testrunner",
+            //"program": "${workspaceFolder}/build-native-12.2.0/exe/cpu1/osal-core-test",
+            "args": ["-d"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build-native-12.2.0/exe/cpu1",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Run EDS generator tool",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build-native-12.2.0/tools/eds/tool/sedstool",
+            "environment": [{
+                "name": "VERBOSE",
+                "value": "2"
+            }],
+            "args": [
+                 "-DMAKE_PROGRAM=/usr/bin/gmake",
+                 "-DCFLAGS="
+                 "-DCC=/usr/bin/cc",
+                 "-DAR=/usr/bin/ar",
+                 "-DOBJDIR=obj"
+                 "-DMISSION_BINARY_DIR=${workspaceFolder}/build-native-12.2.0",
+                 "-DMISSION_NAME=SampleMission",
+                 "${workspaceFolder}/sample_defs/eds/cfe-topicids.xml",
+                 "${workspaceFolder}/sample_defs/eds/config.xml",
+                 "${workspaceFolder}/cfe/modules/core_api/eds/base_types.xml"
+                 //"${workspaceFolder}/apps/ci_lab/eds/ci_lab.xml",
+                 //"${workspaceFolder}/apps/to_lab/eds/to_lab.xml",
+                 //"${workspaceFolder}/apps/sch_lab/eds/sch_lab.xml",
+                 //"${workspaceFolder}/apps/soistest/eds/ccsds_sois_presentwhen.xml",
+                 //"${workspaceFolder}/apps/soistest/eds/ccsds_sois_sampletypes.xml",
+                 "${workspaceFolder}/apps/sample_app/eds/sample_app.xml",
+                 //"${workspaceFolder}/apps/fcgiapp/eds/fcgi.xml",
+                 //"${workspaceFolder}/apps/fm/eds/fm.xml",
+                 //"${workspaceFolder}/apps/hk/eds/HK.xml",
+                 //"${workspaceFolder}/apps/ds/eds/DS.xml",
+                 //"${workspaceFolder}/apps/hs/eds/HS.xml",
+                 "${workspaceFolder}/tools/eds/cfecfs/missionlib/eds/instance-rules.xml",
+                 "${workspaceFolder}/cfe/modules/es/eds/cfe_es.xml",
+                 "${workspaceFolder}/cfe/modules/evs/eds/cfe_evs.xml",
+                 "${workspaceFolder}/cfe/modules/fs/eds/cfe_fs.xml",
+                 "${workspaceFolder}/cfe/modules/sb/eds/cfe_sb.xml",
+                 "${workspaceFolder}/cfe/modules/tbl/eds/cfe_tbl.xml",
+                 "${workspaceFolder}/cfe/modules/time/eds/cfe_time.xml",
+                 "${workspaceFolder}/tools/eds/cfecfs/edsmsg/eds/ccsds_spacepacket.xml",
+                 "${workspaceFolder}/tools/eds/cfecfs/edsmsg/eds/cfe_hdr.xml",
+                 "${workspaceFolder}/cfe/modules/resourceid/eds/cfe_resourceid.xml",
+                 "${workspaceFolder}/tools/eds/tool/scripts/05-seds_parse_defines.lua",
+                 "${workspaceFolder}/tools/eds/tool/scripts/10-seds_resolve_refs.lua",
+                 "${workspaceFolder}/tools/eds/tool/scripts/15-seds_create_implicit_scalars.lua",
+                 "${workspaceFolder}/tools/eds/tool/scripts/20-seds_resolve_sizes.lua",
+                 "${workspaceFolder}/tools/eds/tool/scripts/25-seds_resolve_constraints.lua",
+                 "${workspaceFolder}/tools/eds/tool/scripts/30-seds_resolve_components.lua",
+                 "${workspaceFolder}/tools/eds/edslib/eds/40-seds_write_headers.lua",
+                 "${workspaceFolder}/tools/eds/edslib/eds/45-seds_write_datatypedb_objects.lua",
+                 "${workspaceFolder}/tools/eds/edslib/eds/50-seds_write_displaydb_objects.lua",
+                 "${workspaceFolder}/tools/eds/edslib/eds/55-write_edsdb_makefiles.lua",
+                 "${workspaceFolder}/tools/eds/cfecfs/missionlib/eds/70-cfe_sb_parameter_map.lua",
+                 "${workspaceFolder}/tools/eds/cfecfs/missionlib/eds/75-cfe_sb_dispatch_tables.lua",
+                 //"${workspaceFolder}/tools/eds/cfecfs/missionlib/eds/80-build_cfe_sb_interfacedb.lua",
+                 //"${workspaceFolder}/tools/eds/tool/scripts/85-seds_write_resolved_xml.lua",
+                 //"${workspaceFolder}/tools/eds/cfecfs/missionlib/eds/85-write_commandcode_headers.lua",
+                 //"${workspaceFolder}/tools/eds/cfecfs/missionlib/eds/90-write_ccdd_json.lua",
+                 //"${workspaceFolder}/tools/eds/cfecfs/missionlib/eds/90-write_intf_hierarchy.lua",
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build-native-12.2.0",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "(gdb) Run EDS Table Tool",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build-native-12.2.0/tools/eds/cfecfs/eds2cfetbl",
+            "environment": [{
+                "name": "VERBOSE",
+                "value": "2"
+            }],
+            "args": [
+                 //"${workspaceFolder}/apps/soistest/ccsds.sois/seds/interoperability/reference/scripts/nasacfs_generate_bin.lua",
+                 //"${workspaceFolder}/apps/soistest/ccsds.sois/seds/interoperability/reference/scripts/nasacfs_generate_bin.lua",
+                 "-e", "MISSION_DEFS=\\\"/home/joe/code/cfecfs/github/sample_defs\\\"",
+                 "-e", "CPUNAME=\\\"cpu1\\\"",
+                 "-e", "APPNAME=\\\"cfeTestAppTable\\\"",
+                 "-e", "TABLENAME=\\\"cfe_test_tbl\\\"",
+                 "${workspaceFolder}/build-native-12.2.0/tables/eds/cpu1/cfeTestAppTable_cfe_test_tbl.so"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build-native-12.2.0",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}
