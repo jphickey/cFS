@@ -1,8 +1,8 @@
 # CMake snippet for building the host-side tools.
 project(CFETOOLS C)
 
-add_subdirectory(cFS-GroundSystem/Subsystems/cmdUtil)
-add_subdirectory(tblCRCTool)
+#add_subdirectory(cFS-GroundSystem/Subsystems/cmdUtil)
+#add_subdirectory(tblCRCTool)
 
 if (CFE_EDS_ENABLED_BUILD)
     # build the EDS tool set which is used later in the build
