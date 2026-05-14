@@ -77,14 +77,13 @@ jobs:
         with:
           repository: 'OpenC3/cosmos-project'
           ref: 'v${{ env.COSMOS_VERSION }}'
-          name: ${{ matrix.config }}-gem-content
-          path: ${{ matrix.config }}-gem-content
+          path: ${{ matrix.config }}-cosmos-project
 
       # This needs to patch relative refs (e.g. "./") with absolute paths to remap them
       - name: Set up COSMOS
         id: setup-cosmos
         run: |
-          COSMOS_PROJECT_DIR=$(realpath ./cosmos-project)
+          COSMOS_PROJECT_DIR=$(realpath "./${{ matrix.config }}-cosmos-project")
           sed -i -e 's/- ".\//- "${COSMOS_PROJECT_DIR}\//' ${COSMOS_PROJECT_DIR}/compose.yaml
           echo project-dir="${COSMOS_PROJECT_DIR}" >> ${GITHUB_OUTPUT}
 
