@@ -51,7 +51,7 @@ jobs:
       - name: Upload gem contents
         uses: actions/upload-artifact@v7
         with:
-          name: ${{ matrix.config }}-gem-content
+          name: ${{ matrix.config }}-gem-source
           path: build-${{ matrix.config }}/cosmos/plugin/*
 
 
@@ -64,12 +64,15 @@ jobs:
       matrix:
         config: [ native_std ]
 
+    env:
+      GEM_WORKSPACE: ${{ github.workspace }}/build-gem-${{ matrix.config }}
+
     steps:
       - name: 'Download artifact'
         uses: actions/download-artifact@v8
         with:
-          name: ${{ matrix.config }}-gem-content
-          path: ${{ matrix.config }}-gem-content
+          name: ${{ matrix.config }}-gem-source
+          path: ${{ env.GEM_WORKSPACE }}/source
 
       ## Note this does not use actions/checkout because this is a public repo
       - name: Check out COSMOS
@@ -77,28 +80,26 @@ jobs:
         with:
           repository: 'OpenC3/cosmos-project'
           ref: 'v${{ env.COSMOS_VERSION }}'
-          path: ${{ matrix.config }}-cosmos-project
+          path: ${{ env.GEM_WORKSPACE }}/cosmos-project
 
-      # This needs to patch relative refs (e.g. "./") with absolute paths to remap them
-      - name: Set up COSMOS
-        id: setup-cosmos
-        run: |
-          COSMOS_PROJECT_DIR=$(realpath "./${{ matrix.config }}-cosmos-project")
-          sed -i -e 's/- ".\//- "${COSMOS_PROJECT_DIR}\//' ${COSMOS_PROJECT_DIR}/compose.yaml
-          echo project-dir="${COSMOS_PROJECT_DIR}" >> ${GITHUB_OUTPUT}
+      ## This needs to patch relative refs (e.g. "./") with absolute paths to remap them
+      #- name: Set up COSMOS
+      #  working-directory: ${{ env.GEM_WORKSPACE }}/cosmos-project
+      #  run: sed -i -e 's/- ".\//- "$(realpath .)\//' ./compose.yaml
 
       - name: Build GEM
+        working-directory: ${{ env.GEM_WORKSPACE }}/cosmos-project
         env:
-          WORKSPACE_GEM_DIR: ${{ github.workspace }}/${{ matrix.config }}-gem-content
-          COSMOS_PROJECT_DIR: ${{ steps.setup-cosmos.outputs.project-dir }}
+          GEM_SOURCE_DIR: ${{ env.GEM_WORKSPACE }}/source
         run: >
-          docker compose -f "${COSMOS_PROJECT_DIR}/compose.yaml" run --rm
-          -v ${WORKSPACE_GEM_DIR}:/openc3/local:z
-          --user $(id -u):$(id -g) -w /openc3/local -e OPENC3_API_PASSWORD=${OPENC3_API_PASSWORD} --no-deps
+          docker compose run --rm --no-deps
+          -v ${GEM_SOURCE_DIR}:/openc3/local:z
+          --user $(id -u):$(id -g)
+          -w /openc3/local
           openc3-cosmos-cmd-tlm-api ruby /openc3/bin/openc3cli rake build VERSION=7.0.1
 
       - name: Upload gem binary
         uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.config }}-gem-binary
-          path: ${{ matrix.config }}-gem-content/*.gem
+          path: ${{ env.GEM_WORKSPACE }}/source/*.gem
