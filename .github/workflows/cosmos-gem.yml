@@ -99,7 +99,7 @@ jobs:
           openc3-cosmos-cmd-tlm-api ruby /openc3/bin/openc3cli rake build VERSION=7.0.1
 
       - name: Upload gem binary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.config }}-gem-binary
           path: ${{ matrix.config }}-gem-content/*.gem
