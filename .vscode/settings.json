@@ -1,0 +1,24 @@
+{
+    "files.associations": {
+        "cfe_tbl_module_all.h": "c",
+        "cfe_psp_endian.h": "c",
+        "cfe_psp_endian_impl.h": "c",
+        "os-impl-sockets.h": "c",
+        "ocs_netdb.h": "c",
+        "os-impl-bsd-sockets-common.h": "c",
+        "ocs_sys_types.h": "c",
+        "cf_cfdp_pdu.h": "c",
+        "hs_test_utils.h": "c",
+        "hs_app.h": "c",
+        "cfe_core_api_msgid_mapping.h": "c"
+    },
+    "makefile.configureOnOpen": false,
+    "terminal.integrated.env.linux": {
+        "PYTHONPATH": "${workspaceFolder}/build-native_jeds/exe/lib/python",
+        "LD_LIBRARY_PATH": "${workspaceFolder}/build-native_jeds/exe/lib"
+    },
+    "python.analysis.extraPaths": [
+        "./build-native_jeds/exe/lib/python"
+    ],
+    "files.trimTrailingWhitespace": true
+}

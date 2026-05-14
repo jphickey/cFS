@@ -59,10 +59,10 @@ $(DEPLOY_DIR)/fetch_yocto_rootfs.cpu2.stamp:
 
 # generic rule for creating a CFS tarball
 # this uses "fakeroot" so the files in the resulting tarball have root:root ownership
-%.tar.xz: $(O)/stamp.install
+%.tar.gz: $(O)/stamp.install
 	mkdir -p "$(dir $(@))"
 	rm -f "$(@)"
-	tar Jc --owner=root --group=root -f "$(abspath $(@)).tmp" -C $(O)/exe/$(CPUNAME) .
+	tar c --owner=root --group=root -f - -C $(O)/exe/$(CPUNAME) . | gzip -3 -c > "$(abspath $(@)).tmp" 
 	mv -v "$(@).tmp" "$(@)"
 
 # generic rule for creating an ext4 image from the build

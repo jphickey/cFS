@@ -1,0 +1,44 @@
+{
+    "configurations": [
+        {
+            "name": "Linux EDS",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include/python3.13"
+            ],
+            "defines": [
+                "_XOPEN_SOURCE=600",
+                "_POSIX_C_SOURCE=200112L",
+                "CFE_EDS_ENABLED"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c99",
+            "cppStandard": "c++03",
+            "intelliSenseMode": "linux-clang-x64",
+            "compileCommands": [
+                "${workspaceFolder}/build-native_jeds/native/default/compile_commands.json",
+                "${workspaceFolder}/build-native_jeds/compile_commands.json"
+            ]
+        },
+        {
+            "name": "Linux Std",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include/python3.13"
+            ],
+            "defines": [
+                "_XOPEN_SOURCE=600",
+                "_POSIX_C_SOURCE=200112L"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c99",
+            "cppStandard": "c++03",
+            "intelliSenseMode": "linux-clang-x64",
+            "compileCommands": [
+                "${workspaceFolder}/build-native_jstd/native/default_cpu1/compile_commands.json",
+                "${workspaceFolder}/build-native_jstd/compile_commands.json"
+            ]
+        }
+    ],
+    "version": 4
+}

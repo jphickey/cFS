@@ -10,7 +10,8 @@
 
 
 # The config names is a complete list of configurations to build
-CONFIG_NAMES := native_std native_eds
+CONFIG_NAMES := native_std native_eds native_rtmid
+CONFIG_NAMES += native_jstd native_jeds
 CONFIG_NAMES += pc686_rtems5 gr712_rtems5
 CONFIG_NAMES += rpi_vxworks7 rpi_linux
 CONFIG_NAMES += qemu_yocto_linux
@@ -26,6 +27,9 @@ CFS_CONFIG_NAMES    := $(filter-out $(NONCFS_CONFIG_NAMES),$(CONFIG_NAMES))
 
 O_native_std = build-native_std
 O_native_eds = build-native_eds
+O_native_rtmid = build-native_rtmid
+O_native_jstd = build-native_jstd
+O_native_jeds = build-native_jeds
 O_pc686_rtems5 = build-pc686_rtems5
 O_gr712_rtems5 = build-gr712_rtems5
 O_rpi_vxworks7 = build-rpi_vxworks7
@@ -38,6 +42,9 @@ O_edslib = build-edslib
 # this is required for everything listed in CFS_CONFIG_NAMES
 ARCH_native_std = native
 ARCH_native_eds = native
+ARCH_native_rtmid = native
+ARCH_native_jstd = native
+ARCH_native_jeds = native
 ARCH_pc686_rtems5 = i686-rtems5
 ARCH_gr712_rtems5 = leon3-gaisler-rtems5
 ARCH_rpi_vxworks7 = arm-rpi-vxworks7
@@ -56,6 +63,13 @@ PREP_OPTS_native_std += -DMISSIONCONFIG=sample
 PREP_OPTS_native_std += -DCMAKE_BUILD_TYPE=debug
 PLATFORM_native_std  =  default_cpu1
 
+PREP_OPTS_native_jstd += -DENABLE_UNIT_TESTS=TRUE
+PREP_OPTS_native_jstd += -DSIMULATION=$(ARCH)
+PREP_OPTS_native_jstd += -DCFE_EDS_ENABLED=OFF
+PREP_OPTS_native_jstd += -DMISSIONCONFIG=joe
+PREP_OPTS_native_jstd += -DCMAKE_BUILD_TYPE=debug
+PLATFORM_native_jstd  =  default_cpu1
+
 ##############
 # EDS build
 ##############
@@ -67,6 +81,16 @@ PREP_OPTS_native_eds += -DCFE_MISSIONLIB_PYTHON_BUILD_STANDALONE_MODULE=ON
 PREP_OPTS_native_eds += -DMISSIONCONFIG=sample
 PREP_OPTS_native_eds += -DCMAKE_BUILD_TYPE=debug
 PLATFORM_native_eds  =  default_cpu1
+
+PREP_OPTS_native_jeds += -DENABLE_UNIT_TESTS=TRUE
+PREP_OPTS_native_jeds += -DSIMULATION=$(ARCH)
+PREP_OPTS_native_jeds += -DCFE_EDS_ENABLED=ON
+PREP_OPTS_native_jeds += -DEDSLIB_PYTHON_BUILD_STANDALONE_MODULE=ON
+PREP_OPTS_native_jeds += -DCFE_MISSIONLIB_PYTHON_BUILD_STANDALONE_MODULE=ON
+PREP_OPTS_native_jeds += -DMISSIONCONFIG=joe
+PREP_OPTS_native_jeds += -DCMAKE_BUILD_TYPE=debug
+ENV_OPTS_native_jeds  += TESTRUNNER_DEBUG=1
+PLATFORM_native_jeds  =  default
 
 ##############
 # RTEMS builds
@@ -90,9 +114,10 @@ PREP_OPTS_rpi_vxworks7 += -DMISSIONCONFIG=sample
 PREP_OPTS_rpi_vxworks7 += -DCMAKE_BUILD_TYPE=release
 PLATFORM_rpi_vxworks7  =  default_cpu1
 PREP_OPTS_rpi_linux    += -DSIMULATION=$(ARCH)
-PREP_OPTS_rpi_linux    += -DMISSIONCONFIG=sample
+PREP_OPTS_rpi_linux    += -DCFE_EDS_ENABLED=ON
+PREP_OPTS_rpi_linux    += -DMISSIONCONFIG=joe
 PREP_OPTS_rpi_linux    += -DCMAKE_BUILD_TYPE=release
-PLATFORM_rpi_linux     =  default_cpu1
+PLATFORM_rpi_linux     =  default
 
 ##############
 # Flight-like build (embedded yocto linux targets)

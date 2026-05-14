@@ -1,0 +1,181 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "combo build",
+            "type": "shell",
+            "command": "make -j2 native_eds.install native_std.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Build CFE core and related modules for native architecture"
+        },
+        {
+            "label": "eds build",
+            "type": "shell",
+            "command": "make -j1 native_eds.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Build CFE core and related modules for native architecture"
+        },
+        {
+            "label": "jeds build",
+            "type": "shell",
+            "command": "make -j1 native_jeds.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Build CFE core and related modules for native architecture"
+        },
+        {
+            "label": "jstd build",
+            "type": "shell",
+            "command": "make -j1 native_jstd.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Build CFE core and related modules for native architecture"
+        },
+        {
+            "label": "geds build",
+            "type": "shell",
+            "command": "make -j1 native_geds.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "Build CFE core and related modules for native architecture"
+        },
+        {
+            "label": "gstd build",
+            "type": "shell",
+            "command": "make -j1 native_gstd.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Build CFE core and related modules for native architecture"
+        },
+        {
+            "label": "native build",
+            "type": "shell",
+            "command": "make -j1 native_std.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Build CFE core and related modules for native architecture"
+        },
+        {
+            "label": "rtmid build",
+            "type": "shell",
+            "command": "make -j1 native_rtmid.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Build CFE core and related modules for native architecture"
+        },
+        {
+            "label": "OSAL standalone build",
+            "type": "shell",
+            "command": "make -j1 osal.compile VERBOSE=1",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Build OSAL and related modules for native architecture"
+        },
+        {
+            "label": "Prebuild",
+            "type": "shell",
+            "command": "make VERBOSE=1 -C build-native mission-prebuild",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Build Platform Config List tool"
+        },
+        {
+            "label": "BPLib standalone build",
+            "type": "shell",
+            "command": "make VERBOSE=1 bplib_o.compile bplib_p.compile",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Build BPLib library as standalone"
+        },
+        {
+            "label": "RTEMS build",
+            "type": "shell",
+            "command": "make -j1 qemurtems.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build CFE core and related modules for RTEMS",
+            "group": "build"
+        },
+        {
+            "label": "GR712 build",
+            "type": "shell",
+            "command": "make -j1 gr712_rtems5.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build CFE core and related modules for GR712",
+            "group": "build"
+        },
+        {
+            "label": "Flight build",
+            "type": "shell",
+            "command": "make -j3 flight.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build CFE core and related modules for flight (+optimization enabled)",
+            "group": "build"
+        },
+        {
+            "label": "RPi build",
+            "type": "shell",
+            "command": "make -j1 rpi.install",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build CFE core and related modules for RPi",
+            "group": "build"
+        },
+        {
+            "label": "Regenerate EDS artifacts",
+            "type": "shell",
+            "command": "rm -f build-eds-14.2.0/*.stamp && make -C build-eds-14.2.0 edstool-execute",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Run EDS tool to regenerate headers and objects",
+            "group": "build"
+        },
+        {
+            "label": "Compile EDS Table Tool",
+            "type": "shell",
+            "command": "make -C build-eds/tools/eds/cfecfs/eds2cfetbl eds2cfetbl",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build the EDS table tool only",
+            "group": "build"
+        }
+    ]
+}
