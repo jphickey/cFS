@@ -1,0 +1,105 @@
+name: Build COSMOS tests
+
+# Run on all pull requests, and pushes in dev and main branches
+on:
+  push:
+    branches:
+      - dev
+      - main
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+  workflow_dispatch:
+
+# Force bash to apply pipefail option so pipeline failures aren't masked
+defaults:
+  run:
+    shell: bash
+
+env:
+  COSMOS_VERSION: '6.10.5'
+  GH_HOST: developer.nasa.gov
+  GH_REPO: cFS/cFS
+
+jobs:
+  stage-gem:
+    strategy:
+      fail-fast: false
+      matrix:
+        config: [ native_std ]
+
+    name: 'Set up ${{ matrix.config }} gem source'
+    runs-on: cfs-self-hosted
+    container:
+      image: aetd-dockerlab.gsfc.nasa.gov/gsfc-cfs/github-actions-ci-cd/cfsbuildenv-ubuntu22
+    steps:
+      - name: Checkout Bundle
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Prepare ${{ matrix.config }} Build
+        run: make ${{ matrix.config }}.prep
+
+      - name: Stage gem contents
+        run: make ${{ matrix.config }}.gem
+
+      - name: Upload gem contents
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.config }}-gem-content
+          path: build-${{ matrix.config }}/cosmos/plugin/*
+
+
+  build-gem:
+    name: 'Build ${{ matrix.config }} gem binary'
+    needs: stage-gem
+    runs-on: cfs-self-hosted
+    strategy:
+      fail-fast: false
+      matrix:
+        config: [ native_std ]
+
+    steps:
+      - name: 'Download artifact'
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ matrix.config }}-gem-content
+          path: ${{ matrix.config }}-gem-content
+
+      - name: Find mountpoint
+        id: mountpoint
+        run: |
+          docker inspect $HOSTNAME | jq --arg ws "${GITHUB_WORKSPACE}" '[ .[0].Mounts|.[] as $mt | $ws|select(startswith($mt.Destination))|$mt ]' > ${RUNNER_TEMP}/mountpoints.json
+          cat ${RUNNER_TEMP}/mountpoints.json
+          source="$(jq -r '.[0].Source' ${RUNNER_TEMP}/mountpoints.json)"
+          destination="$(jq -r '.[0].Destination' ${RUNNER_TEMP}/mountpoints.json)"
+          echo workspace=${source}${GITHUB_WORKSPACE##${destination}} >> ${GITHUB_OUTPUT}
+
+      ## Note this does not use actions/checkout because this is a public repo
+      # This needs to patch relative refs (e.g. "./") with absolute paths to remap them
+      - name: Set up COSMOS
+        id: setup-cosmos
+        run: |
+          curl -fL --no-progress-meter https://github.com/OpenC3/cosmos-project/archive/refs/tags/v${COSMOS_VERSION}.tar.gz | tar zxvf -
+          sed -i -e 's/- ".\//- "${COSMOS_PROJECT_DIR}\//' ${GITHUB_WORKSPACE}/cosmos-project-${COSMOS_VERSION}/compose.yaml
+          echo project-dir="cosmos-project-${COSMOS_VERSION}" >> ${GITHUB_OUTPUT}
+
+      - name: Build GEM
+        env:
+          WORKSPACE_REMAP_DIR: ${{ steps.mountpoint.outputs.workspace }}
+          COSMOS_PROJECT_DIR: ${{ steps.mountpoint.outputs.workspace }}/${{ steps.setup-cosmos.outputs.project-dir }}
+        run: >
+          docker compose -f "${{ steps.setup-cosmos.outputs.project-dir }}/compose.yaml" run --rm
+          -v ${WORKSPACE_REMAP_DIR}/${{ matrix.config }}-gem-content:/openc3/local:z
+          --user $(id -u):$(id -g) -w /openc3/local -e OPENC3_API_PASSWORD=${OPENC3_API_PASSWORD} --no-deps
+          openc3-cosmos-cmd-tlm-api ruby /openc3/bin/openc3cli rake build VERSION=7.0.1
+
+      - name: Upload gem binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.config }}-gem-binary
+          path: ${{ matrix.config }}-gem-content/*.gem
