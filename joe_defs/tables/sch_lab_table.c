@@ -131,7 +131,7 @@ SCH_LAB_ScheduleTable_t Schedule = {
 #endif
 #ifdef HAVE_CF
     {CFE_SB_MSGID_WRAP_VALUE(CF_SEND_HK_MID), 40, 0}, /* TopicID=180 */
-    {CFE_SB_MSGID_WRAP_VALUE(CF_WAKE_UP_MID), 40, 0}, /* TopicID=181 */
+    {CFE_SB_MSGID_WRAP_VALUE(CF_WAKE_UP_MID), 2, 0}, /* TopicID=181 */
 #endif
 #ifdef HAVE_FM
     {CFE_SB_MSGID_WRAP_VALUE(FM_SEND_HK_MID), 40, 0}, /* TopicID=141 */

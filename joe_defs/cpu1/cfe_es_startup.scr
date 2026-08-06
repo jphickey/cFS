@@ -14,8 +14,8 @@ CFE_APP, cf,          CF_AppMain,         CF,           60,   16384, 0x0, 0;
 CFE_APP, hs,          HS_AppMain,         HS,           80,   16384, 0x0, 0;
 CFE_APP, lc,          LC_AppMain,         LC,           90,   16384, 0x0, 0;
 CFE_APP, md,          MD_AppMain,         MD,           91,   16384, 0x0, 0;
-!CFE_APP, cfe_testcase,  CFE_TestMain,       CFE_TEST, 100,   65536, 0x0, 0;
 CFE_APP, sgw,         SGW_AppMain,        SGW,          60,   16384, 0x0, 0;
+!CFE_APP, cfe_testcase,  CFE_TestMain,       CFE_TEST, 100,   65536, 0x0, 0;
 !
 ! Startup script fields:
 ! 1. Object Type      -- CFE_APP for an Application, or CFE_LIB for a library.

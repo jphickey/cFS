@@ -99,6 +99,8 @@ LIST(APPEND MISSION_GLOBAL_APPLIST sc)
 LIST(APPEND MISSION_GLOBAL_APPLIST ds)
 LIST(APPEND MISSION_GLOBAL_APPLIST hk)
 
+LIST(APPEND MISSION_GLOBAL_APPLIST sgw)
+
 # Some apps do not have EDS support yet.  These should not
 # be included by default when building with EDS.
 if (NOT CFE_EDS_ENABLED)
@@ -125,7 +127,7 @@ SET(cpu1_PROCESSORID 1)
 
 # This is the traditional CFE basic framework
 SET(cpu1_APPLIST ci_lab to_lab sch_lab)
-
+SET(cpu1_PSP_MODULELIST unsock_intf)
 SET(cpu1_FILELIST cfe_es_startup.scr)
 SET(cpu1_SYSTEM riscv64-poky-linux)
 
@@ -135,7 +137,7 @@ SET(cpu1_SYSTEM riscv64-poky-linux)
 # endian processor must work together in the same system.
 SET(cpu2_PROCESSORID 2)
 SET(cpu2_APPLIST ci_lab to_lab sch_lab)
-
+SET(cpu2_PSP_MODULELIST unsock_intf)
 SET(cpu2_FILELIST cfe_es_startup.scr)
 SET(cpu2_SYSTEM mips32r2-poky-linux)
 
