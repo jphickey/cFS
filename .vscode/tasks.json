@@ -28,10 +28,7 @@
             "problemMatcher": [
                 "$gcc"
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
+            "group": "build",
             "detail": "Build CFE core and related modules for native architecture"
         },
         {
@@ -41,7 +38,10 @@
             "problemMatcher": [
                 "$gcc"
             ],
-            "group": "build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "detail": "Build CFE core and related modules for native architecture"
         },
         {

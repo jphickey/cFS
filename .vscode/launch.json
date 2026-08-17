@@ -127,7 +127,7 @@
             "name": "(gdb) Launch CFE Unit Test (native)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build-native_jstd/exe/cpu1/coverage-cf-cf_app-testrunner",
+            "program": "${workspaceFolder}/build-native_jstd/exe/cpu1/coverage-hs-hs_exec_monitor-testrunner",
             //"program": "${workspaceFolder}/build-native_jstd/exe/cpu1/osal-core-test",
             "args": ["-d"],
             "stopAtEntry": false,
