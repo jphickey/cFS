@@ -91,7 +91,23 @@ jobs:
       - name: Build Document
         run: |
           make -C build ${{ matrix.target }} 2>&1 > ${{ matrix.target }}_stdout.txt | tee ${{ matrix.target }}_stderr.txt
-          mv build/docs/${{ matrix.target }}/${{ matrix.target }}-warnings.log .
+
+      - name: Filter warnings
+        env:
+          WORKFLOW_REF: ${{ github.workflow_ref }}
+          APP_NAME: ${{ inputs.app-name }}
+        run: |
+          dirs=("${APP_NAME}" "apps/${APP_NAME}" "libs/${APP_NAME}")
+          echo MY_REF=${WORKFLOW_REF}
+          for d in "${dirs[@]}"
+          do
+            echo testing $d
+            if [ -d "./$d" ]
+            then
+              echo $d EXISTS!
+            end
+          done
+          /bin/false
 
       - name: Archive Document Build Logs
         uses: actions/upload-artifact@v7
