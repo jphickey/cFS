@@ -99,24 +99,9 @@ jobs:
           IN_FILE: ./build/docs/${{ matrix.target }}/${{ matrix.target }}-warnings.log
           OUT_FILE: ./${{ matrix.target }}-warnings.log
         run: |
-          ls -la
-          app_path=$(grep -A1 "${APP_NAME}_MISSION_DIRX" build/mission_vars.cache | tail -1 || echo .)
-          echo "app_path=${app_path}"
-          dirs=("${APP_NAME}" "apps/${APP_NAME}" "libs/${APP_NAME}")
-          filter_exp="."
-          for d in "${dirs[@]}"
-          do
-            echo testing $d
-            if [ -d "./$d" ]
-            then
-              echo $d EXISTS!
-              filter_exp="$d"
-            fi
-          done
-          cat "${IN_FILE}"
-          echo "OUT:"
+          app_path=$(grep -A1 "${APP_NAME}_MISSION_DIR" build/mission_vars.cache | tail -1 || echo .)
+          echo "filtering warnings by app_path=${app_path}"
           grep "^${app_path}" "${IN_FILE}" | tee "${OUT_FILE}" || /bin/true
-          /bin/false
 
       - name: Archive Document Build Logs
         uses: actions/upload-artifact@v7
