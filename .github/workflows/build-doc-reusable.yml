@@ -111,8 +111,6 @@ jobs:
               filter_exp="$d"
             fi
           done
-          grep "${filter_exp}"
-          fi
           cat "${IN_FILE}"
           echo "OUT:"
           grep "${filter_exp}" "${IN_FILE}" | tee "${OUT_FILE}" || /bin/true
