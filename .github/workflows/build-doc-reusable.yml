@@ -100,7 +100,7 @@ jobs:
           OUT_FILE: ./${{ matrix.target }}-warnings.log
         run: |
           ls -la
-          app_path=$(grep -A1 "${APP_NAME}_MISSION_DIR" build/mission_vars.cache | tail -1)
+          app_path=$(grep -A1 "${APP_NAME}_MISSION_DIRX" build/mission_vars.cache | tail -1 || echo .)
           echo "app_path=${app_path}"
           dirs=("${APP_NAME}" "apps/${APP_NAME}" "libs/${APP_NAME}")
           filter_exp="."
@@ -115,7 +115,7 @@ jobs:
           done
           cat "${IN_FILE}"
           echo "OUT:"
-          grep "${filter_exp}" "${IN_FILE}" | tee "${OUT_FILE}" || /bin/true
+          grep "^${app_path}" "${IN_FILE}" | tee "${OUT_FILE}" || /bin/true
           /bin/false
 
       - name: Archive Document Build Logs
