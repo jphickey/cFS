@@ -96,12 +96,14 @@ jobs:
         env:
           WORKFLOW_REF: ${{ github.workflow_ref }}
           APP_NAME: ${{ inputs.app-name }}
-          IN_FILE: ${{ matrix.target }}_stderr.txt
-          OUT_FILE: ${{ matrix.target }}-warnings.log
+          IN_FILE: ./build/docs/${{ matrix.target }}/${{ matrix.target }}-warnings.log
+          OUT_FILE: ./${{ matrix.target }}-warnings.log
         run: |
+          ls -la
+          app_path=$(grep -A1 "${APP_NAME}_MISSION_DIR" build/mission_vars.cache | tail -1)
+          echo "app_path=${app_path}"
           dirs=("${APP_NAME}" "apps/${APP_NAME}" "libs/${APP_NAME}")
           filter_exp="."
-          echo MY_REF=${WORKFLOW_REF}
           for d in "${dirs[@]}"
           do
             echo testing $d
