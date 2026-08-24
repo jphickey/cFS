@@ -96,8 +96,11 @@ jobs:
         env:
           WORKFLOW_REF: ${{ github.workflow_ref }}
           APP_NAME: ${{ inputs.app-name }}
+          IN_FILE: ${{ matrix.target }}_stderr.txt
+          OUT_FILE: ${{ matrix.target }}-warnings.log
         run: |
           dirs=("${APP_NAME}" "apps/${APP_NAME}" "libs/${APP_NAME}")
+          filter_exp="."
           echo MY_REF=${WORKFLOW_REF}
           for d in "${dirs[@]}"
           do
@@ -105,8 +108,14 @@ jobs:
             if [ -d "./$d" ]
             then
               echo $d EXISTS!
+              filter_exp="$d"
             fi
           done
+          grep "${filter_exp}"
+          fi
+          cat "${IN_FILE}"
+          echo "OUT:"
+          grep "${filter_exp}" "${IN_FILE}" | tee "${OUT_FILE}" || /bin/true
           /bin/false
 
       - name: Archive Document Build Logs
