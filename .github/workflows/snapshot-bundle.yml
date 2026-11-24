@@ -1,0 +1,127 @@
+name: Snapshot CFS bundle
+
+# Controls when the action will run.
+on:
+  workflow_dispatch:
+    inputs:
+      base-branch:
+        description: 'The base branch to merge into (main)'
+        type: string
+        required: false
+        default: ''
+      ic-branch:
+        description: 'The temporary integration branch to create (ic)'
+        type: string
+        required: false
+        default: ''
+      dev-branch:
+        description: 'The branch to pull in (dev)'
+        type: string
+        required: false
+        default: ''
+
+permissions:
+  issues: write
+  contents: write
+  pull-requests: write
+  actions: write
+
+env:
+  BASE_BRANCH: ${{ inputs.base-branch || 'main' }}
+  DEV_BRANCH: ${{ inputs.dev-branch || github.event.repository.default_branch }}
+  GH_REPO: ${{ github.repository }}
+  GH_HOST: github.com
+  GH_TOKEN: ${{ secrets.GH_PAT || github.token }}
+
+jobs:
+  snapshot-bundle:
+    name: Snapshot CFS bundle
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Determine IC branch
+        env:
+          IC_BRANCH_IN: ${{ inputs.ic-branch }}
+        run: |
+          if [ -z "${IC_BRANCH_IN}" ]
+          then
+            echo "IC_BRANCH=ic-$(date +%Y%m%d)" >> ${GITHUB_ENV}
+          else
+            echo "IC_BRANCH=${IC_BRANCH_IN}" >> ${GITHUB_ENV}
+          fi
+
+      - name: Checkout bundle
+        uses: actions/checkout@v6
+        with:
+          repository: ${{ github.repository }}
+          submodules: true
+          ref: ${{ env.BASE_BRANCH }}
+          token: ${{ env.GH_TOKEN }}
+
+      - name: Check initial versions
+        run: git submodule
+
+      - name: Fetch base branch in submodules
+        run: git submodule foreach 'git fetch origin --no-tags refs/heads/${BASE_BRANCH}:${BASE_BRANCH}'
+
+      - name: Fetch dev branch in submodules
+        run: git submodule foreach 'git fetch origin --no-tags refs/heads/${DEV_BRANCH}:${DEV_BRANCH}'
+
+      - name: Create integration branch in submodules
+        run: git submodule foreach 'git checkout -b ${IC_BRANCH} ${BASE_BRANCH}'
+
+      - name: Merge dev branch into integration candidate
+        run: |
+          cat << EOF > ${RUNNER_TEMP}/commit-msg.txt
+          Integration Candidate: $(date +%Y-%m-%d) development snapshot
+
+          Automatically generated code snapshot
+            - development branch: ${DEV_BRANCH}
+            - target branch: ${BASE_BRANCH}
+          EOF
+          # Most of the time this should be a FF merge, but not
+          # doing as FF so we can put a snapshot commit msg on it
+          # There must not be conflicts, if there are, then this cannot be done automatically.
+          git submodule foreach 'git merge --no-ff -F ${RUNNER_TEMP}/commit-msg.txt'
+
+      - name: Create PRs
+        run: |
+          git submodule foreach 'GH_REPO=$(git remote get-url origin); GH_REPO=${GH_REPO##*${GH_HOST}[:/]}; echo ${GH_REPO}'
+
+      - name: Stop
+        run: /bin/false
+
+#      - name: Check for existing pull request
+#        run: |
+#          gh pr list --base "${BASE_BRANCH}" --head "ic-latest-${SUBMODULE_BRANCH}" --json number,title > ${RUNNER_TEMP}/pull-request.json
+#          if [ "$(jq length ${RUNNER_TEMP}/pull-request.json)" -gt 0 ]; then
+#            echo "Found existing PR:"
+#            cat ${RUNNER_TEMP}/pull-request.json
+#          else
+#            rm ${RUNNER_TEMP}/pull-request.json
+#          fi
+#
+#      - name: Create integration branch
+#        if: steps.status-check.outputs.branch-name != ''
+#        run: |
+#            git config --global user.email "actions@developer.nasa.gov"
+#            git config --global user.name "Github Action"
+#            git checkout -b "${{ steps.status-check.outputs.branch-name }}"
+#            cat << EOF > ${RUNNER_TEMP}/commit-msg.txt
+#            Integration Candidate: $(date +%Y-%m-%d) bundle updates
+#
+#            Automatically collected bundle updates
+#              - submodule source branch: ${SUBMODULE_BRANCH}
+#              - bundle branch: to ${BASE_BRANCH}
+#            EOF
+#            git commit -a -F ${RUNNER_TEMP}/commit-msg.txt
+#            git push origin -f "${{ steps.status-check.outputs.branch-name }}"
+#
+#      - name: Create pull request
+#        if: steps.status-check.outputs.branch-name != ''
+#        run: |
+#            if [ -e ${RUNNER_TEMP}/pull-request.json ]; then
+#              echo "Pull request already exists: ${{ github.server_url }}/${GH_REPO}/pull/$(jq '.[0].number' ${RUNNER_TEMP}/pull-request.json)"
+#            else
+#              gh pr create -B "${BASE_BRANCH}" -H "${{ steps.status-check.outputs.branch-name }}" --title "Latest bundle updates from ${SUBMODULE_BRANCH} branch" --body 'Created by Github action'
+#            fi
